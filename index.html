@@ -1,0 +1,566 @@
+<!doctype html>
+<html lang="en" style="color-scheme:dark">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="color-scheme" content="dark">
+<meta name="theme-color" content="#0a0a0e">
+<title>The Microphone and the Morgue</title>
+<meta name="description" content="Every June, California's Attorney General stages the hate crime report and releases the homicide numbers quietly, with no event. Built entirely from his own data.">
+<meta property="og:type" content="article">
+<meta property="og:title" content="The Microphone and the Morgue">
+<meta property="og:description" content="Every June, California's Attorney General stages the hate crime report and releases the homicide numbers quietly, with no event. Built entirely from his own data.">
+<meta property="og:url" content="https://dont-shoot-the-data.github.io/microphone-and-the-morgue/">
+<meta property="og:site_name" content="Don't Shoot the Data">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="The Microphone and the Morgue">
+<meta name="twitter:description" content="Every June, California's Attorney General stages the hate crime report and releases the homicide numbers quietly, with no event. Built entirely from his own data.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;500;700;900&family=JetBrains+Mono:wght@400;500;700&family=DM+Sans:wght@400;500;600;700&display=swap" rel="stylesheet">
+<style>
+:root{color-scheme:dark;forced-color-adjust:none;--bg:#0a0a0e;--card:#121218;--line:#26262f;--txt:#e8e8ec;--sub:#8a8a9a;--mut:#55556a;--red:#ff4555;--c-White:#4ea8de;--c-Hispanic:#e8853a;--c-Black:#c840e9;--c-Asian:#e8d44d;--c-Other:#e8d44d;--c-AIAN:#4ade80}
+*{margin:0;padding:0;box-sizing:border-box}
+html{scroll-behavior:smooth}
+body{background:var(--bg)!important;color:var(--txt)!important;font-family:'DM Sans',sans-serif;line-height:1.6;-webkit-font-smoothing:antialiased;overflow-x:hidden}
+.wrap{max-width:860px;margin:0 auto;padding:0 22px}
+.eyebrow{font-family:'JetBrains Mono',monospace;font-size:11px;letter-spacing:3px;text-transform:uppercase;color:var(--red)!important;margin-bottom:14px}
+.head{font-family:'Playfair Display',serif;font-weight:900;color:var(--txt)!important;line-height:1.07;letter-spacing:-.5px}
+h2.head{font-size:clamp(28px,5vw,46px);margin-bottom:16px}
+.prose{font-size:15.5px;line-height:1.75;color:var(--sub)!important;max-width:660px}
+.prose b{color:var(--txt)!important;font-weight:600}
+.prose .hot{color:var(--red)!important;font-weight:700}
+.prose a{color:var(--c-White)!important;text-decoration:underline;text-decoration-thickness:1px;text-underline-offset:2px;text-decoration-color:rgba(78,168,222,.45);transition:text-decoration-color .2s}
+.prose a:hover{text-decoration-color:var(--c-White)!important}
+.fr-grid{display:grid;grid-template-columns:auto 1fr 1fr;gap:8px 10px;margin:24px 0 8px;align-items:center}
+.fr-h{font-family:'JetBrains Mono',monospace;font-size:9.5px;letter-spacing:1.5px;text-transform:uppercase;color:var(--mut)!important;text-align:center}
+.fr-yr{font-family:'JetBrains Mono',monospace;font-size:13px;color:var(--sub)!important;font-weight:700}
+.fr-cell{border-radius:6px;padding:8px 10px;font-family:'JetBrains Mono',monospace;font-size:9.5px;letter-spacing:1px;text-transform:uppercase;text-align:center;font-weight:700;text-decoration:none;cursor:pointer;display:block}
+.fr-loud:hover{background:rgba(255,69,85,.24)!important}
+.fr-quiet:hover{border-color:var(--sub)!important;color:var(--sub)!important}
+.subhead{font-family:'Playfair Display',serif;font-weight:900;font-size:clamp(26px,5.5vw,40px);line-height:1.08;letter-spacing:-.01em;margin:4px 0 0}
+.fr-paren{font-family:'JetBrains Mono',monospace;font-size:12px;font-weight:400;letter-spacing:1px;color:var(--sub)!important;margin:12px 0 4px}
+.obj-sources-btn{background:transparent;color:var(--red)!important;border:1px solid var(--red);padding:10px 18px;border-radius:4px;font-family:'JetBrains Mono',monospace;font-size:10.5px;font-weight:700;cursor:pointer;letter-spacing:1.5px;text-transform:uppercase;transition:all .25s ease;margin:16px 0 4px;display:inline-flex;align-items:center;gap:8px}
+.obj-sources-btn:hover{background:var(--red);color:var(--txt)!important;box-shadow:0 4px 16px rgba(255,69,85,.35);transform:translateY(-1px)}
+.obj-sources-modal{display:none;position:fixed;inset:0;background:rgba(0,0,0,.88);z-index:9999;justify-content:center;align-items:center;padding:20px;backdrop-filter:blur(10px)}
+.obj-sources-modal.active{display:flex}
+.obj-sources-modal-inner{background:var(--card);border:1px solid var(--line);border-radius:12px;max-width:580px;width:100%;max-height:80vh;overflow-y:auto;padding:28px;position:relative}
+.obj-sources-modal-close{position:absolute;top:10px;right:14px;background:none;border:none;font-size:26px;cursor:pointer;color:var(--mut);line-height:1;transition:color .2s ease}
+.obj-sources-modal-close:hover{color:var(--red)}
+.obj-sources-modal-inner h3{font-family:'JetBrains Mono',monospace;font-size:14px;font-weight:700;letter-spacing:1.5px;text-transform:uppercase;color:var(--red)!important;margin-bottom:6px}
+.obj-sources-modal-intro{font-size:12px;color:var(--mut)!important;margin-bottom:16px;line-height:1.6;font-family:'DM Sans',sans-serif}
+.obj-sources-list{border:1px solid var(--line);border-radius:8px;overflow:hidden}
+.obj-sources-list a{display:flex;align-items:center;gap:12px;padding:11px 16px;text-decoration:none;border-bottom:1px solid rgba(255,255,255,.05);transition:background .15s ease}
+.obj-sources-list a:last-child{border-bottom:none}
+.obj-sources-list a:hover{background:rgba(255,69,85,.08)}
+.obj-sources-list .obj-src-year{font-family:'JetBrains Mono',monospace;font-size:13px;font-weight:700;color:var(--red)!important;min-width:48px}
+.obj-sources-list .obj-src-title{font-size:12px;color:var(--sub)!important;flex:1;font-family:'DM Sans',sans-serif}
+.obj-sources-list .obj-src-ext{font-size:10px;color:var(--mut)!important;font-family:'JetBrains Mono',monospace}
+.obj-sources-footer{font-size:10px;color:var(--mut)!important;margin-top:14px;text-align:center;letter-spacing:.5px;font-family:'JetBrains Mono',monospace}
+
+.fr-loud{background:rgba(255,69,85,.14)!important;border:1px solid var(--red);color:var(--red)!important}
+.fr-quiet{background:transparent!important;border:1px solid var(--line);color:var(--mut)!important}
+.fr-pred{border-style:dashed!important;opacity:.8}
+.fr-cap{font-family:'JetBrains Mono',monospace;font-size:9.5px;letter-spacing:1px;color:var(--mut)!important;margin:0 0 16px}
+.pred{display:flex;gap:14px;align-items:flex-start;background:var(--card)!important;border:1px solid var(--line);border-radius:10px;padding:14px 16px;margin-top:10px}
+.pred .pbox{min-width:30px;height:30px;border:1.5px solid var(--mut);border-radius:6px;display:flex;align-items:center;justify-content:center;cursor:pointer;font-size:15px;font-weight:700;color:transparent;user-select:none;transition:all .15s}
+.pred .pbox.yes{border-color:#4ade80;color:#4ade80;background:rgba(74,222,128,.1)}
+.pred .pbox.no{border-color:var(--red);color:var(--red);background:rgba(255,69,85,.1)}
+.pred .ptxt{font-family:'DM Sans',sans-serif;font-size:13.5px;line-height:1.7;color:var(--txt)!important}
+.pred .ptxt .pn{font-family:'JetBrains Mono',monospace;font-size:10px;letter-spacing:2px;color:var(--red)!important;font-weight:700;margin-right:8px}
+.prose+.prose{margin-top:14px}
+.section{padding:84px 0 8px}
+.panel{background:var(--card)!important;border:1px solid var(--line);border-radius:12px;padding:20px;margin-top:18px}
+.fineprint{font-family:'JetBrains Mono',monospace;font-size:10.5px;line-height:1.7;color:var(--mut)!important;margin-top:14px;max-width:780px}
+.fineprint b{color:var(--sub)!important}
+.fineprint a{color:var(--sub)!important}
+.statband{display:flex;flex-wrap:wrap;gap:12px;margin:18px 0 4px}
+.statband .s{flex:1;min-width:140px;background:rgba(255,255,255,.02);border:1px solid var(--line);border-radius:10px;padding:15px 17px}
+.statband .sn{font-family:'Playfair Display',serif;font-weight:900;font-size:42px;line-height:1}
+.statband .sl{font-size:11.5px;color:var(--mut)!important;margin-top:7px;line-height:1.4}
+.cmp-svg{display:block;width:100%;margin:6px auto 0}
+.cmp-leg{display:flex;flex-wrap:wrap;gap:14px;font-family:'JetBrains Mono',monospace;font-size:10px;color:var(--mut)!important;margin-top:12px}
+.cmp-leg span{display:inline-flex;align-items:center;gap:6px}
+.cmp-leg i{width:9px;height:9px;border-radius:2px}
+.navarrow{display:flex;justify-content:center;margin-top:16px}
+.navarrow a{display:flex;align-items:center;justify-content:center;width:44px;height:44px;border:1.5px solid var(--mut);border-radius:50%;cursor:pointer;color:var(--sub);transition:all .25s;animation:bob 2.2s ease-in-out infinite}
+.navarrow a:hover{border-color:var(--red);color:var(--red)}
+.navarrow svg{width:20px;height:20px;stroke:currentColor;stroke-width:2;fill:none}
+@keyframes bob{0%,100%{transform:translateY(0)}50%{transform:translateY(6px)}}
+.hero{min-height:100vh;display:flex;flex-direction:column;justify-content:center;padding:30px 0 16px}
+.hero .eyebrow{margin-bottom:11px}
+.display{font-family:'Playfair Display',serif;font-weight:900;font-size:clamp(30px,5.6vw,54px);line-height:1.05;letter-spacing:-1px;margin-top:13px;color:var(--txt)!important}
+.lede{font-size:clamp(15px,2.1vw,18px);line-height:1.65;color:var(--sub)!important;max-width:630px;margin-top:9px}
+.lede b{color:var(--txt)!important;font-weight:600}
+.dotfield{display:block;width:100%;max-width:560px;opacity:0;animation:fadein 1.2s ease .2s forwards}
+.dotcap{font-family:'JetBrains Mono',monospace;font-size:10px;color:var(--mut)!important;margin-top:10px;letter-spacing:.4px}
+.lede a{color:var(--c-White)!important;text-decoration:underline;text-decoration-thickness:1px;text-underline-offset:2px;text-decoration-color:rgba(78,168,222,.45);transition:text-decoration-color .2s}
+.lede a:hover{text-decoration-color:var(--c-White)!important}
+.lede em{font-style:italic;color:var(--txt)!important}
+#dotsvg .hd{transition:opacity .22s ease}
+#dotsvg[data-hl] .hd{opacity:.08}
+#dotsvg[data-hl] .hd-hate{opacity:1}
+#dotsvg[data-hl="White"] .hd-White{opacity:1;fill:var(--c-White)}
+#dotsvg[data-hl="Black"] .hd-Black{opacity:1;fill:var(--c-Black)}
+#dotsvg[data-hl="Hispanic"] .hd-Hispanic{opacity:1;fill:var(--c-Hispanic)}
+#dotsvg[data-hl="Other"] .hd-Other{opacity:1;fill:var(--c-Other)}
+.dotleg{display:flex;flex-wrap:wrap;gap:8px;margin:11px 0 0}
+.dlg{font-family:'JetBrains Mono',monospace;font-size:10px;letter-spacing:.5px;color:var(--sub)!important;background:transparent!important;border:1px solid var(--line);border-radius:20px;padding:4px 9px 4px 7px;cursor:pointer;display:inline-flex;align-items:center;gap:7px;transition:all .18s;text-transform:uppercase}
+.dlg:hover,.dlg.act{border-color:var(--sub);color:var(--txt)!important}
+.dlg b{color:var(--txt)!important;font-weight:700}
+.dsw{width:9px;height:9px;border-radius:50%;display:inline-block;flex:none}
+
+@keyframes fadein{to{opacity:1}}
+.kd-glow{transform-box:fill-box;transform-origin:center;animation:kdglow 1.9s ease-out infinite}
+.kd-glow2{animation-delay:.95s}
+@keyframes kdglow{0%{transform:scale(.55);opacity:.6}70%{opacity:.08}100%{transform:scale(3);opacity:0}}
+/* arrest disproportionality module */
+.pillrow{display:flex;gap:8px;flex-wrap:wrap;margin:0 0 4px}
+.cpill{font-family:inherit;font-size:11px;font-weight:700;letter-spacing:1px;padding:7px 13px;border-radius:7px;background:transparent!important;cursor:pointer;border:1.5px solid var(--mut);color:var(--sub)!important;text-transform:uppercase}
+.cpill.on{border-color:var(--red);color:var(--red)!important;background:rgba(255,69,85,.08)!important}
+.arr{margin-top:14px}
+.arr .vhead{font-family:'JetBrains Mono',monospace;font-size:8px;letter-spacing:1.6px;color:var(--mut)!important;text-transform:uppercase;margin-bottom:10px}
+.arr .vlegend{display:flex;gap:16px;align-items:center;font-family:'JetBrains Mono',monospace;font-size:9px;letter-spacing:.6px;color:var(--sub)!important;margin-bottom:20px}
+.arr .vlegend span{display:inline-flex;align-items:center;gap:7px}
+.arr .vsw{width:12px;height:12px;border-radius:3px;display:inline-block}
+.arr .vsw.sa{background:linear-gradient(180deg,#9aa0ad,#6c7280)}
+.arr .vsw.sp{background:linear-gradient(transparent 44%,rgba(255,255,255,.92) 44%,rgba(255,255,255,.92) 62%,transparent 62%)}
+.arr .vwrap{display:flex;gap:10px}
+.arr .vyax{position:relative;width:28px;height:270px;flex:none}
+.arr .vyl{position:absolute;right:0;transform:translateY(50%);font-family:'JetBrains Mono',monospace;font-size:9px;color:var(--mut)!important;letter-spacing:.5px}
+.arr .vright{flex:1;min-width:0}
+.arr .vfield{position:relative;height:270px}
+.arr .vgrid{position:absolute;left:0;right:0;height:0;border-top:1px solid rgba(255,255,255,.05)}
+.arr .vgrid.base{border-top:1px solid var(--line)}
+.arr .vbars{position:absolute;inset:0;display:flex;align-items:flex-end}
+.arr .vgroup{position:relative;flex:1;height:100%}
+.arr .vbar{position:absolute;bottom:0;left:50%;transform:translateX(-50%);width:48%;border-radius:4px 4px 0 0;box-shadow:inset 0 0 0 .5px rgba(255,255,255,.08);transition:height .5s cubic-bezier(.22,1,.36,1)}
+.arr .vval{position:absolute;top:-17px;left:50%;transform:translateX(-50%);font-family:'JetBrains Mono',monospace;font-size:11px;font-weight:600;white-space:nowrap}
+.arr .popmark{position:absolute;left:13%;right:13%;height:2px;background:rgba(255,255,255,.92);border-radius:1px;box-shadow:0 1px 2px rgba(0,0,0,.55)}
+.arr .popnum{position:absolute;right:9%;font-family:'JetBrains Mono',monospace;font-size:9px;font-weight:500;color:#fff!important;opacity:.72;white-space:nowrap}
+.arr .poptag{position:absolute;left:13%;font-family:'JetBrains Mono',monospace;font-size:7.5px;letter-spacing:1px;color:#fff!important;opacity:.4}
+.arr .vlabs{display:flex;margin-top:11px}
+.arr .vlab{flex:1;text-align:center;font-family:'JetBrains Mono',monospace;font-size:11px;letter-spacing:.4px;line-height:1.45}
+.arr .vlab .nm{display:block;font-weight:600}
+.arr .vlab .dx{display:block;font-size:10px;color:var(--sub)!important;margin-top:2px}
+/* interactive race module */
+.pickwrap{display:flex;flex-direction:column;gap:10px;margin:6px 0 6px}
+.pickrow{display:flex;align-items:center;gap:8px;flex-wrap:wrap}
+.picklab{font-size:10px;letter-spacing:2.5px;color:var(--sub)!important;width:140px;text-transform:uppercase}
+.pill{font-family:inherit;font-size:11px;font-weight:700;letter-spacing:1px;padding:7px 13px;border-radius:7px;background:transparent!important;cursor:pointer}
+.pill.White{border:1.5px solid var(--c-White);color:var(--c-White)!important}
+.pill.Hispanic{border:1.5px solid var(--c-Hispanic);color:var(--c-Hispanic)!important}
+.pill.Black{border:1.5px solid var(--c-Black);color:var(--c-Black)!important}
+.pill.Asian{border:1.5px solid var(--c-Asian);color:var(--c-Asian)!important}
+.pill.AIAN{border:1.5px solid var(--c-AIAN);color:var(--c-AIAN)!important}
+.pill.on.White{background:var(--c-White)!important;color:#0a0a0e!important}
+.pill.on.Hispanic{background:var(--c-Hispanic)!important;color:#0a0a0e!important}
+.pill.on.Black{background:var(--c-Black)!important;color:#0a0a0e!important}
+.pill.on.Asian{background:var(--c-Asian)!important;color:#0a0a0e!important}
+.pill.on.AIAN{background:var(--c-AIAN)!important;color:#0a0a0e!important}
+.unitrow{display:flex;gap:8px;margin:2px 0 12px;flex-wrap:wrap;align-items:center}
+.unit{font-family:inherit;font-size:10px;font-weight:700;letter-spacing:1.4px;padding:8px 13px;border-radius:7px;border:1.5px solid var(--mut);color:var(--sub)!important;background:transparent!important;cursor:pointer;text-transform:uppercase;transition:all .2s}
+.unit:hover{border-color:var(--red);color:var(--red)!important}
+.unit.on{border-color:var(--red);color:var(--red)!important;background:rgba(255,69,85,.08)!important}
+.totals{display:flex;gap:22px;flex-wrap:wrap;border:1px solid var(--line);border-left:4px solid var(--red);border-radius:8px;padding:15px 18px;background:var(--card)!important;margin-bottom:13px}
+.tot .n{font-family:'Playfair Display',serif;font-size:30px;font-weight:900;line-height:1.1}
+.tot .l{font-size:9.5px;letter-spacing:1.4px;color:var(--mut)!important;text-transform:uppercase;margin-top:4px;max-width:170px;line-height:1.7}
+.totglyph{align-self:center;font-size:12px;color:var(--mut)!important}
+.chartscroll{overflow-x:auto;border:1px solid var(--line);border-radius:10px;background:var(--card)!important}
+.serieslab{display:flex;justify-content:space-between;font-size:10px;letter-spacing:2.4px;text-transform:uppercase;padding:10px 14px 0;gap:10px}
+.chart{display:flex;gap:3px;padding:8px 12px 14px;min-width:820px}
+.col{flex:1;display:flex;flex-direction:column;align-items:center;border-radius:4px;transition:background .15s}
+.col.flip{background:rgba(255,69,85,.08)!important}
+.abox{height:150px;display:flex;flex-direction:column;justify-content:flex-end;align-items:center;width:100%}
+.bbox{height:108px;display:flex;flex-direction:column;justify-content:flex-start;align-items:center;width:100%}
+.vbar{width:66%;border-radius:2px;animation:growv .5s ease both}
+.abox .vbar{transform-origin:bottom}
+.bbox .vbar{transform-origin:top}
+.aval,.bval{font-size:8.5px;font-weight:700;padding:2px 0;animation:fadev .4s ease both}
+.yr{font-size:9px;color:var(--mut)!important;letter-spacing:.5px;padding:4px 0}
+.yr.flip{color:var(--red)!important;font-weight:700}
+.legswatch{display:inline-block;width:10px;height:10px;background:rgba(255,69,85,.18);border:1px solid rgba(255,69,85,.5);border-radius:2px;margin-right:6px;vertical-align:-1px}
+@keyframes growv{from{transform:scaleY(0)}to{transform:scaleY(1)}}
+@keyframes fadev{from{opacity:0}to{opacity:1}}
+#trendTooltip{position:fixed;z-index:100;background:#1a1a22;border:1px solid var(--line);border-radius:8px;padding:8px 11px;font-family:'JetBrains Mono',monospace;font-size:11px;color:var(--txt);pointer-events:none;opacity:0;transition:opacity .12s;box-shadow:0 8px 30px rgba(0,0,0,.55);max-width:240px}
+#trendTooltip.visible{opacity:1}
+.src-toggle{font-family:'JetBrains Mono',monospace;font-size:11px;letter-spacing:2px;text-transform:uppercase;color:var(--sub)!important;background:transparent!important;border:1px solid var(--mut);border-radius:8px;padding:11px 16px;cursor:pointer}
+.src-toggle:hover{border-color:var(--sub)}
+.src-body{display:none;margin-top:16px}
+.src-body.open{display:block}
+.src-list{font-family:'JetBrains Mono',monospace;font-size:11.5px;line-height:1.9;color:var(--sub)!important;max-width:800px}
+.src-list a{color:var(--c-White)!important;text-decoration:none}
+.src-list a:hover{text-decoration:underline}
+.src-note{color:var(--mut)!important;margin-top:14px;display:block}
+.footer{font-family:'JetBrains Mono',monospace;font-size:10px;color:var(--mut)!important;text-align:center;padding:60px 0 44px;letter-spacing:1px}
+a:focus-visible,.pill:focus-visible,.cpill:focus-visible,.unit:focus-visible,.src-toggle:focus-visible,.navarrow a:focus-visible{outline:2px solid var(--red);outline-offset:3px}
+@media(prefers-reduced-motion:reduce){*{animation:none!important;transition:none!important}.dotfield{opacity:1}}
+@media(max-width:560px){.section{padding:60px 0 6px}.statband .sn{font-size:34px}.hero{padding:20px 0 12px}.arr .vyax{height:235px}.arr .vfield{height:235px}.arr .vval{font-size:10px}}
+</style>
+</head>
+<body>
+<div id="trendTooltip"></div>
+
+<section class="hero wrap" id="hero">
+<div class="eyebrow">California &middot; 2021&ndash;2024 &middot; his own reports</div>
+<div id="dotfield"></div>
+<div class="dotleg" id="dotleg"></div>
+<div class="dotcap">An average year, 2,031 homicides, shaded by the race arrested. The two red dots are the hate crimes. Tap a color to isolate.</div>
+<h1 class="display">Loud about hate.<br>Silent about murder.</h1>
+<div class="lede">Every year, California Attorney General Rob Bonta rolls out his <a href="https://data-openjustice.doj.ca.gov/sites/default/files/2025-06/Hate%20Crime%20In%20CA%202024.pdf" target="_blank" rel="noopener"><em>Hate Crime in California</em></a> report at a press conference of its own. A week later, the <a href="https://data-openjustice.doj.ca.gov/sites/default/files/2025-07/Crime%20In%20CA%202024%20final.pdf" target="_blank" rel="noopener"><em>Crime in California</em></a> report lands with no event, which breaks down homicide, rape, robbery, and kidnapping arrests by race. That one you have to find for yourself. Let's see why.</div>
+<div class="navarrow"><a onclick="go('stage')" tabindex="0" role="button" aria-label="Continue"><svg viewBox="0 0 24 24"><path d="M12 5v14M19 12l-7 7-7-7"/></svg></a></div>
+</section>
+
+<section class="section wrap" id="stage">
+<div class="eyebrow">What he puts on stage</div>
+<h2 class="head">Six killings in four years.</h2>
+<div class="prose">Across his whole tenure, every hate crime in the state combined produced <b>six murders and ten rapes</b>. The rest is vandalism, threats, and shoving.</div>
+<div class="panel">
+<div class="statband" style="margin-top:0">
+<div class="s"><div class="sn" style="color:var(--txt)">76%</div><div class="sl">vandalism, threats, and shoving</div></div>
+<div class="s"><div class="sn" style="color:var(--red)">0.2%</div><div class="sl">murder and rape, combined</div></div>
+</div>
+<div id="cmpChart"></div>
+<div id="cmpLeg" class="cmp-leg"></div>
+<div class="fineprint">Every hate offense in California, 2021 to 2024, share of all 9,496 single-bias offenses. CA DOJ Hate Crime in California, Tables 22 to 24.</div>
+<button class="obj-sources-btn" onclick="openHateSourcesModal()">&#128269; Verify Any Year &middot; 4 Hate Crime Reports</button>
+</div>
+<div class="navarrow"><a onclick="go('podium')" tabindex="0" role="button" aria-label="Continue"><svg viewBox="0 0 24 24"><path d="M12 5v14M19 12l-7 7-7-7"/></svg></a></div>
+</section>
+
+<section class="section wrap" id="podium">
+<div class="eyebrow">What the podium produces</div>
+<h2 class="head">1,969 announced. 62 convicted.</h2>
+<div class="prose">That is his yearly average. The crime that almost never convicts gets the microphone. The one that convicts six in ten gets a PDF.</div>
+<div class="panel">
+<div class="statband" style="margin-top:0">
+<div class="s"><div class="sn" style="color:var(--red)">3.2%</div><div class="sl">of announced hate events end in a hate conviction</div></div>
+<div class="s"><div class="sn" style="color:var(--c-White)">59.7%</div><div class="sl">of felony arrests end in conviction</div></div>
+</div>
+<div id="convChart"></div>
+<div class="fineprint">Per-year averages, 2021 to 2024: 1,969 hate events announced, 62 hate convictions (7,876 and 249 across the four years; Tables 11, 7B). Felony conviction rate 59.7% (Crime in California, Table 37). Denominators differ: hate is counted per event announced, felonies per arrest.</div>
+</div>
+<div class="navarrow"><a onclick="go('who')" tabindex="0" role="button" aria-label="Continue"><svg viewBox="0 0 24 24"><path d="M12 5v14M19 12l-7 7-7-7"/></svg></a></div>
+</section>
+
+<section class="section wrap" id="who">
+<div class="eyebrow">FBI homicide files &middot; California &middot; 1981&ndash;2022</div>
+<h2 class="head">Who actually kills whom in <span style="color:var(--red)!important">California</span>.</h2>
+<div class="prose">The June ceremony implies the danger is white hate. His own state's homicide files say the opposite. Most killing never crosses race at all, <b>75.8% same-race</b>. When it does cross, it runs the other way: <span class="hot">Black-on-White outnumbers White-on-Black 2,852 to 1,603</span>. A table that showed this would undercut the ceremony, so the office that prints arrests by race has never once printed it. Pick any two groups.</div>
+<div class="panel">
+<div class="pickwrap">
+<div class="pickrow"><div class="picklab">&#9650; Above the line</div><span id="row-above"></span></div>
+<div class="pickrow"><div class="picklab">&#9660; Below the line</div><span id="row-below"></span></div>
+</div>
+<div class="unitrow"><span class="picklab" style="width:auto">Counting</span><button class="unit on" id="u-dyad" onclick="setUnit('dyad')">Every suspect</button><button class="unit" id="u-prim" onclick="setUnit('prim')">One per victim</button></div>
+<div class="totals" id="totals"></div>
+<div class="chartscroll">
+<div class="serieslab"><span id="lab-above"></span><span id="lab-below"></span></div>
+<div class="chart" id="chart"></div>
+</div>
+<div class="fineprint" id="wwLegend" style="margin-top:10px"></div>
+<div class="fineprint" id="unitnote"></div>
+<div class="fineprint">Solved cases, a victim and a suspect on file, from the <a href="https://www.murderdata.org/p/data-docs.html" target="_blank" rel="noopener">FBI Supplementary Homicide Reports</a>. Not motive, not coded as hate.</div>
+</div>
+<div class="navarrow"><a onclick="go('commits')" tabindex="0" role="button" aria-label="Continue"><svg viewBox="0 0 24 24"><path d="M12 5v14M19 12l-7 7-7-7"/></svg></a></div>
+</section>
+
+<section class="section wrap" id="commits">
+<div class="eyebrow">The tables he never reads aloud</div>
+<h2 class="head">And here is who gets arrested, crime by crime, in <span style="color:var(--red)!important">California</span>.</h2>
+<div class="prose">His own department publishes felony arrests by race every year, Hispanic kept separate from White: Crime in California, Table 31. He has never quoted a row of it. The white line on each bar marks that group's share of the population, so any bar that clears it is overrepresentation. Pick a crime.</div>
+<div class="panel">
+<div class="pillrow" id="crimePills"></div>
+<div class="arr" id="arrModule"></div>
+<div class="fineprint" id="arrNote"></div>
+<button class="obj-sources-btn" onclick="openCASourcesModal()">&#128269; Verify Any Year &middot; 25 CA AG Reports</button>
+</div>
+<div class="navarrow"><a onclick="go('frontrun')" tabindex="0" role="button" aria-label="Continue"><svg viewBox="0 0 24 24"><path d="M12 5v14M19 12l-7 7-7-7"/></svg></a></div>
+</section>
+
+<section class="section wrap" id="frontrun">
+<div class="eyebrow">Five years, one choreography</div>
+<h2 class="head">He raised the alarm on graffiti.<br>He buried the body count.</h2>
+<div class="prose">He gives the hate report <a href="https://oag.ca.gov/news/press-releases/attorney-general-bonta-unveils-new-guidance-reports-help-public-and-law" target="_blank" rel="noopener">an epidemic</a> and a stage, and lets the room picture a villain. His own <a href="https://data-openjustice.doj.ca.gov/sites/default/files/2025-07/Homicide%20In%20CA%202024%20final.pdf" target="_blank" rel="noopener">homicide tables</a>, the ones he never reads aloud, name a different one. <span class="hot">The number that makes minorities the victim gets a microphone. The number that makes them the suspect gets buried.</span> Not the calendar. Editorial policy, and the editor is the California Attorney General.</div>
+
+<div class="prose">And it is all on the record, in advance. For four straight years, the same June: a standalone hate report he rolls out himself, then the Crime in California report days later with no event. Every cell below links to its source.</div>
+
+<div class="fr-grid">
+<div></div><div class="fr-h">Hate report</div><div class="fr-h">Crime in California report</div>
+<div class="fr-yr">2021</div><a class="fr-cell fr-loud" href="https://www.kqed.org/news/11918196/new-california-crime-data-show-an-epidemic-of-hate-says-california-attorney-general-bonta" target="_blank" rel="noopener">press event</a><a class="fr-cell fr-quiet" href="https://oag.ca.gov/news/press-releases/attorney-general-bonta-releases-california-criminal-justice-statistical-reports" target="_blank" rel="noopener">no event</a>
+<div class="fr-yr">2022</div><a class="fr-cell fr-loud" href="https://news.yahoo.com/pervasive-california-hate-crimes-soared-013624956.html" target="_blank" rel="noopener">press event</a><a class="fr-cell fr-quiet" href="https://www.oag.ca.gov/news/press-releases/attorney-general-bonta-releases-california-criminal-justice-statistical-0" target="_blank" rel="noopener">no event</a>
+<div class="fr-yr">2023</div><a class="fr-cell fr-loud" href="https://www.ebar.com/story/75927" target="_blank" rel="noopener">press event</a><a class="fr-cell fr-quiet" href="https://www.oag.ca.gov/news/press-releases/attorney-general-bonta-releases-california-criminal-justice-statistical-1" target="_blank" rel="noopener">no event</a>
+<div class="fr-yr">2024</div><a class="fr-cell fr-loud" href="https://calmatters.digitaldemocracy.org/hearings/259613" target="_blank" rel="noopener">Assembly hearing</a><a class="fr-cell fr-quiet" href="https://oag.ca.gov/news/press-releases/attorney-general-bonta-releases-california-criminal-justice-statistical-2" target="_blank" rel="noopener">no event</a>
+<div class="fr-yr fr-pred">2025</div><a class="fr-cell fr-loud fr-pred" href="https://oag.ca.gov/media/news" target="_blank" rel="noopener">press event</a><a class="fr-cell fr-quiet fr-pred" href="https://oag.ca.gov/media/news" target="_blank" rel="noopener">no event</a>
+</div>
+<div class="fr-cap">Hate report: out front every year, from live pressers to a hearing before the Assembly's Select Committee on Racism, Hate, and Xenophobia. Crime in California report: bundled into a statistical release, no event. 2021 to 2024 happened; 2025 is the forecast below.</div>
+
+<div class="navarrow"><a onclick="go('forecast')" tabindex="0" role="button" aria-label="Continue"><svg viewBox="0 0 24 24"><path d="M12 5v14M19 12l-7 7-7-7"/></svg></a></div>
+
+<div class="eyebrow" id="forecast">The forecast</div>
+<h3 class="subhead">How to predict the future.</h3>
+<div class="fr-paren">(Predictability is its own kind of evidence.)</div>
+<div class="prose" style="margin-top:6px">The pattern makes the 2025 cycle knowable before any of it drops, and it drops within days. The hate report lands in the last week of June; the crime bundle, homicides included, on or about July 1. That is the point of filing this now instead of after: the calls go on the record before the release, not once they are safe. Tap each box as the reports prove it out, and check the work against <a href="https://oag.ca.gov/media/news" target="_blank" rel="noopener">oag.ca.gov/media/news</a>.</div>
+
+<div class="pred"><div class="pbox" onclick="gradeP(this)"></div><div class="ptxt"><span class="pn">P1</span>Hate Crime in California 2025 drops in late June, on its own, ahead of the crime reports.</div></div>
+<div class="pred"><div class="pbox" onclick="gradeP(this)"></div><div class="ptxt"><span class="pn">P2</span>It names victim bias categories and reports no suspect demographics.</div></div>
+<div class="pred"><div class="pbox" onclick="gradeP(this)"></div><div class="ptxt"><span class="pn">P3</span>The crime reports, homicides included, arrive on or about July 1, bundled together.</div></div>
+<div class="pred"><div class="pbox" onclick="gradeP(this)"></div><div class="ptxt"><span class="pn">P4</span>The homicide findings give no race for victims or for those arrested.</div></div>
+<div class="pred"><div class="pbox" onclick="gradeP(this)"></div><div class="ptxt"><span class="pn">P5</span>A public event for the hate report. None for the homicides.</div></div>
+
+<div class="prose" style="margin-top:14px">Five boxes. If they check, the performance held for a fifth straight year: the one percent of violent crime that flatters the story gets a microphone, and the ninety-nine percent that complicates it gets a filing date.</div>
+</section>
+
+<div class="obj-sources-modal" id="caSourcesModal" onclick="if(event.target===this)closeObjModal('caSourcesModal')">
+  <div class="obj-sources-modal-inner">
+    <button class="obj-sources-modal-close" onclick="closeObjModal('caSourcesModal')">&times;</button>
+    <h3>California Attorney General &middot; Crime in California</h3>
+    <p class="obj-sources-modal-intro">The arrest disparities in this chart are a 24-year average. Every year behind it is sourced from these annual reports. Each link opens the official PDF.</p>
+    <div class="obj-sources-list" id="caSourcesList"></div>
+    <p class="obj-sources-footer">25 reports &middot; 2000 to 2024 &middot; Published by the California Department of Justice</p>
+  </div>
+</div>
+
+<div class="obj-sources-modal" id="hateSourcesModal" onclick="if(event.target===this)closeObjModal('hateSourcesModal')">
+  <div class="obj-sources-modal-inner">
+    <button class="obj-sources-modal-close" onclick="closeObjModal('hateSourcesModal')">&times;</button>
+    <h3>California Attorney General &middot; Hate Crime in California</h3>
+    <p class="obj-sources-modal-intro">The six murders and ten rapes are his own count, across 2021 to 2024. Every year is sourced from these annual reports. Each link opens the official PDF.</p>
+    <div class="obj-sources-list" id="hateSourcesList"></div>
+    <p class="obj-sources-footer">4 reports &middot; 2021 to 2024 &middot; Published by the California Department of Justice</p>
+  </div>
+</div>
+
+<section class="section wrap" id="sources">
+<button class="src-toggle" onclick="toggleSrc()" aria-expanded="false" id="srcBtn">Sources &amp; method &#9662;</button>
+<div class="src-body" id="srcBody">
+<div class="src-list">
+<a href="https://data-openjustice.doj.ca.gov/sites/default/files/2025-06/Hate%20Crime%20In%20CA%202024.pdf" target="_blank" rel="noopener">Hate Crime in California 2024</a> &middot; <a href="https://data-openjustice.doj.ca.gov/sites/default/files/2024-06/Hate%20Crime%20In%20CA%202023f_0.pdf" target="_blank" rel="noopener">2023</a> &middot; <a href="https://data-openjustice.doj.ca.gov/sites/default/files/2023-06/Hate%20Crime%20In%20CA%202022f.pdf" target="_blank" rel="noopener">2022</a> &middot; <a href="https://data-openjustice.doj.ca.gov/sites/default/files/2022-08/Hate%20Crime%20In%20CA%202021.pdf" target="_blank" rel="noopener">2021</a><br>
+<a href="https://data-openjustice.doj.ca.gov/sites/default/files/2025-07/Homicide%20In%20CA%202024%20final.pdf" target="_blank" rel="noopener">Homicide in California 2024</a><br>
+<a href="https://data-openjustice.doj.ca.gov/sites/default/files/2025-07/Crime%20In%20CA%202024%20final.pdf" target="_blank" rel="noopener">Crime in California 2024 (Table 31, Table 37)</a><br>
+<a href="https://www.murderdata.org/p/data-docs.html" target="_blank" rel="noopener">FBI Supplementary Homicide Reports (Murder Accountability Project)</a><br>
+<a href="https://oag.ca.gov/about" target="_blank" rel="noopener">Attorney General Bonta, sworn in April 23, 2021</a>
+<span class="src-note">Year basis: California hate and homicide figures are per-year averages across 2021 to 2024, the average of his four reporting years. The hero shows a single average year (8,125 homicides over the four years, 2,031 a year); the six hate killings span the four years. The race-on-race chart is the FBI Supplementary Homicide Report, California, 1981 to 2022: every reported suspect crossed with every victim (Every suspect), or one suspect per victim under the federal convention (One per victim). Black-on-White exceeds White-on-Black 2,852 to 1,603 under the first rule, 2,118 to 1,283 under the second; the direction holds either way. Suspects in solved cases, not arrests, not convictions, not motive. Arrest shares are the 24-year average of Table 31; the multiplier is arrest share divided by population share (Hispanic 41, White 34, Asian and other 17, Black 5). The release timing and quotes are drawn from the AG's own press releases, 2021 to 2025. A hate-motivated killing is also counted in the homicide total.</span>
+</div>
+</div>
+<div class="footer">dont-shoot-the-data &middot; the numbers are his</div>
+</section>
+
+<script>
+function go(id){var el=document.getElementById(id);if(el)el.scrollIntoView({behavior:'smooth'});}
+function gradeP(el){if(el.classList.contains('yes')){el.classList.remove('yes');el.classList.add('no');el.textContent='\u2717';}else if(el.classList.contains('no')){el.classList.remove('no');el.textContent='';}else{el.classList.add('yes');el.textContent='\u2713';}}
+function toggleSrc(){var b=document.getElementById('srcBody'),btn=document.getElementById('srcBtn');var open=b.classList.toggle('open');btn.setAttribute('aria-expanded',open?'true':'false');}
+
+/* hero: one average year, ~2,031 homicides, 2 hate killings in red */
+(function(){
+  var total=2031,cols=72,cell=10,r=2.8,hate={684:1,1476:1};
+  var shares=[['Hispanic',47.5],['Black',26.4],['White',20.1],['Other',6.0]];
+  var col={White:'var(--c-White)',Black:'var(--c-Black)',Hispanic:'var(--c-Hispanic)',Other:'var(--c-Other)'};
+  var mcol={White:'#5d80a0',Black:'#9d62b0',Hispanic:'#bb7a4d',Other:'#aa9d56'};
+  var arr=[],acc=0;
+  for(var k=0;k<shares.length;k++){var n=(k===shares.length-1)?(total-acc):Math.round(shares[k][1]/100*total);acc+=n;for(var j=0;j<n;j++)arr.push(shares[k][0]);}
+  var sd=20242025;function rnd(){sd|=0;sd=sd+0x6D2B79F5|0;var t=Math.imul(sd^sd>>>15,1|sd);t=t+Math.imul(t^t>>>7,61|t)^t;return((t^t>>>14)>>>0)/4294967296;}
+  for(var i=arr.length-1;i>0;i--){var jx=Math.floor(rnd()*(i+1)),tp=arr[i];arr[i]=arr[jx];arr[jx]=tp;}
+  var rows=Math.ceil(total/cols),W=cols*cell,H=rows*cell,s='';
+  for(var i=0;i<total;i++){var c=i%cols,rw=Math.floor(i/cols),cx=c*cell+cell/2,cy=rw*cell+cell/2;
+    if(hate[i]){s+='<circle cx="'+cx+'" cy="'+cy+'" r="'+(r*2)+'" fill="var(--red)" class="kd-glow kd-glow2"/><circle cx="'+cx+'" cy="'+cy+'" r="'+(r*2)+'" fill="var(--red)" class="kd-glow"/><circle cx="'+cx+'" cy="'+cy+'" r="'+(r*1.75)+'" fill="var(--red)" class="hd hd-hate"/>';}
+    else{var rc=arr[i];s+='<circle cx="'+cx+'" cy="'+cy+'" r="'+r+'" fill="'+mcol[rc]+'" class="hd hd-'+rc+'" opacity=".78"/>';}}
+  document.getElementById('dotfield').innerHTML='<svg class="dotfield" id="dotsvg" viewBox="0 0 '+W+' '+H+'" role="img" aria-label="2,031 dots, one average year of California homicides, colored by the race arrested per Crime in California Table 31; two red dots are hate crimes">'+s+'</svg>';
+  var leg=document.getElementById('dotleg');
+  if(leg){
+    leg.innerHTML='<button class="dlg act" data-r="all">All</button>'+shares.map(function(sh){return '<button class="dlg" data-r="'+sh[0]+'"><span class="dsw" style="background:'+col[sh[0]]+'"></span>'+sh[0]+' <b>'+sh[1]+'%</b></button>';}).join('')+'<button class="dlg" data-r="hate"><span class="dsw" style="background:var(--red)"></span>Hate crime <b>2</b></button>';
+    var svg=document.getElementById('dotsvg');
+    function applyR(x){if(x&&x!=='all'){svg.setAttribute('data-hl',x);}else{svg.removeAttribute('data-hl');}}
+    leg.querySelectorAll('.dlg').forEach(function(b){
+      var rr=b.getAttribute('data-r');
+      b.addEventListener('mouseenter',function(){applyR(rr);});
+      b.addEventListener('mouseleave',function(){var a=leg.querySelector('.dlg.act');applyR(a?a.getAttribute('data-r'):'all');});
+      b.addEventListener('click',function(){leg.querySelectorAll('.dlg').forEach(function(x){x.classList.remove('act');});b.classList.add('act');applyR(rr);});
+    });
+  }
+})();
+
+/* composition: share of all hate offenses */
+(function(){
+  var GRY='#55556a',AMB='#e8853a',RED='#ff4555';
+  var rows=[{l:'Vandalism',v:28.0,c:GRY},{l:'Intimidation (a threat)',v:22.7,c:GRY},{l:'Simple assault (no weapon)',v:22.0,c:GRY},{l:'Aggravated assault',v:21.1,c:AMB},{l:'Other property',v:3.3,c:GRY},{l:'Robbery',v:2.8,c:AMB},{l:'Murder + rape',v:0.2,c:RED}];
+  var W=360,x0=2,x1=358,rowH=37,padT=4,barH=9,maxV=28.0,H=padT+rows.length*rowH,s='';
+  rows.forEach(function(r,i){var y=padT+i*rowH,bw=Math.max(2,(r.v/maxV)*(x1-x0));
+    s+='<text x="'+x0+'" y="'+(y+12)+'" style="fill:var(--sub);font-family:\'JetBrains Mono\',monospace;font-size:12px">'+r.l+'</text>';
+    s+='<text x="'+x1+'" y="'+(y+12)+'" text-anchor="end" style="fill:'+r.c+';font-family:\'JetBrains Mono\',monospace;font-size:12px;font-weight:700">'+(r.v<1?r.v.toFixed(1):r.v.toFixed(0))+'%</text>';
+    s+='<rect x="'+x0+'" y="'+(y+17)+'" width="'+(x1-x0)+'" height="'+barH+'" rx="2" fill="rgba(255,255,255,.04)"/>';
+    s+='<rect x="'+x0+'" y="'+(y+17)+'" width="'+bw+'" height="'+barH+'" rx="2" fill="'+r.c+'"/>';});
+  document.getElementById('cmpChart').innerHTML='<svg class="cmp-svg" style="max-width:380px" viewBox="0 0 '+W+' '+H+'" role="img" aria-label="Hate offenses by type">'+s+'</svg>';
+  document.getElementById('cmpLeg').innerHTML='<span><i style="background:'+GRY+'"></i>non-violent / minor</span><span><i style="background:'+AMB+'"></i>serious assault / robbery</span><span><i style="background:'+RED+'"></i>murder / rape</span>';
+})();
+
+/* conviction comparison (vertical) */
+(function(){
+  var BLU='#4ea8de',RED='#ff4555';
+  var rows=[{l:'Felony arrest',v:59.7,c:BLU},{l:'Hate event',v:3.2,c:RED}];
+  var W=300,pL=12,pR=12,pT=34,pB=42,maxY=70,H=212,plotW=W-pL-pR,plotH=H-pT-pB,base=pT+plotH,s='';
+  function yPx(v){return base-(v/maxY)*plotH;}
+  rows.forEach(function(r,i){var slot=plotW/rows.length,cx=pL+(i+0.5)*slot,bw=66,x=cx-bw/2,top=yPx(r.v);
+    s+='<rect x="'+x+'" y="'+pT+'" width="'+bw+'" height="'+(base-pT)+'" rx="3" fill="rgba(255,255,255,.03)"/>';
+    s+='<rect x="'+x+'" y="'+top+'" width="'+bw+'" height="'+(base-top)+'" rx="3" fill="'+r.c+'"/>';
+    s+='<text x="'+cx+'" y="'+(top-10)+'" text-anchor="middle" style="fill:'+r.c+';font-family:\'Playfair Display\',serif;font-size:24px;font-weight:900">'+r.v.toFixed(1)+'%</text>';
+    s+='<text x="'+cx+'" y="'+(base+20)+'" text-anchor="middle" style="fill:'+r.c+';font-family:\'JetBrains Mono\',monospace;font-size:12px;font-weight:700">'+r.l+'</text>';
+    s+='<text x="'+cx+'" y="'+(base+33)+'" text-anchor="middle" style="fill:var(--mut);font-family:\'JetBrains Mono\',monospace;font-size:9.5px">end in conviction</text>';});
+  document.getElementById('convChart').innerHTML='<svg class="cmp-svg" style="max-width:320px" viewBox="0 0 '+W+' '+H+'" role="img" aria-label="Conviction rate, felony versus hate">'+s+'</svg>';
+})();
+
+/* arrest disproportionality: 24-yr average arrest share vs population (vertical bars, white population line) */
+const stateAvg = {
+  population: { White: 34.0, Black: 5.0, Hispanic: 41.0, Other: 17.0 },
+  homicide: { White: 20.1, Black: 26.4, Hispanic: 47.5, Other: 6.0 },
+  rape: { White: 24.0, Black: 19.0, Hispanic: 51.0, Other: 6.0 },
+  robbery: { White: 17.0, Black: 38.0, Hispanic: 40.5, Other: 4.5 },
+  kidnapping: { White: 22.2, Black: 21.3, Hispanic: 51.5, Other: 5.0 }
+};
+const CRIMES=['homicide','rape','robbery','kidnapping'];
+const ARR_ORDER=['Hispanic','Black','White','Other'];
+const ARR_SCALE=55, ARR_GRID=[10,20,30,40,50];
+let curCrime='homicide';
+function arrLabel(r){return r==='Other'?'Asian/Other':r;}
+function arrColor(r){return 'var(--c-'+r+')';}
+var ARRV={bar:{},val:{},dx:{},PLOT:270,built:false};
+function buildArr(){
+var pr=document.getElementById('crimePills');pr.innerHTML='';
+CRIMES.forEach(function(c){var b=document.createElement('button');b.className='cpill'+(c===curCrime?' on':'');b.textContent=c.toUpperCase();b.onclick=function(){curCrime=c;var ps=document.querySelectorAll('#crimePills .cpill');for(var i=0;i<ps.length;i++)ps[i].classList.remove('on');b.classList.add('on');renderArr();};pr.appendChild(b);});
+var m=document.getElementById('arrModule');
+m.innerHTML='<div class="vhead">Average of all 24 report years (2000, 2002 to 2024)</div><div class="vlegend"><span><i class="vsw sa"></i>Arrest share</span><span><i class="vsw sp"></i>Population share</span></div><div class="vwrap"><div class="vyax" id="arrYax"></div><div class="vright"><div class="vfield" id="arrField"><div class="vbars" id="arrBars"></div></div><div class="vlabs" id="arrLabs"></div></div></div>';
+var field=document.getElementById('arrField'),yax=document.getElementById('arrYax');
+ARRV.PLOT=field.clientHeight||270;
+var base=document.createElement('div');base.className='vgrid base';base.style.bottom='0';field.appendChild(base);
+var z=document.createElement('div');z.className='vyl';z.style.bottom='0px';z.textContent='0';yax.appendChild(z);
+ARR_GRID.forEach(function(v){var y=(v/ARR_SCALE)*ARRV.PLOT;var g=document.createElement('div');g.className='vgrid';g.style.bottom=y+'px';field.appendChild(g);var l=document.createElement('div');l.className='vyl';l.style.bottom=y+'px';l.textContent=v+'%';yax.appendChild(l);});
+var bars=document.getElementById('arrBars'),labs=document.getElementById('arrLabs');
+ARR_ORDER.forEach(function(r){
+var g=document.createElement('div');g.className='vgroup';
+var bar=document.createElement('div');bar.className='vbar';bar.style.background=arrColor(r);bar.style.height='0px';
+var av=document.createElement('span');av.className='vval';av.style.color=arrColor(r);bar.appendChild(av);
+g.appendChild(bar);
+var p=stateAvg.population[r],py=(p/ARR_SCALE)*ARRV.PLOT;
+var mk=document.createElement('div');mk.className='popmark';mk.style.bottom=py+'px';g.appendChild(mk);
+var tg=document.createElement('div');tg.className='poptag';tg.style.bottom=(py+4)+'px';tg.textContent='POP';g.appendChild(tg);
+var nx=document.createElement('div');nx.className='popnum';nx.style.bottom=(py+4)+'px';nx.textContent=p.toFixed(0)+'%';g.appendChild(nx);
+bars.appendChild(g);ARRV.bar[r]=bar;ARRV.val[r]=av;
+var L=document.createElement('div');L.className='vlab';var nm=document.createElement('span');nm.className='nm';nm.style.color=arrColor(r);nm.textContent=arrLabel(r);var dx=document.createElement('span');dx.className='dx';L.appendChild(nm);L.appendChild(dx);labs.appendChild(L);ARRV.dx[r]=dx;
+});
+ARRV.built=true;
+}
+function renderArr(){
+if(!ARRV.built)buildArr();
+var d=stateAvg[curCrime],pop=stateAvg.population;
+ARR_ORDER.forEach(function(r){var a=d[r],p=pop[r],ratio=a/p;ARRV.bar[r].style.height=((a/ARR_SCALE)*ARRV.PLOT)+'px';ARRV.val[r].textContent=a.toFixed(1)+'%';ARRV.dx[r].innerHTML='<b style="color:'+arrColor(r)+'">'+ratio.toFixed(1)+'&times;</b>';});
+var name=curCrime.charAt(0).toUpperCase()+curCrime.slice(1);
+document.getElementById('arrNote').innerHTML='<b>'+name+' felony arrests: average share across all 24 report years.</b> The white line marks each group&rsquo;s share of the California population. The number under each bar is the disproportionality index: arrest share divided by population share, where 1.0&times; is exactly proportional. CA DOJ Table 31, verbatim. Arrests are not convictions.';
+}
+buildArr();
+requestAnimationFrame(function(){requestAnimationFrame(renderArr);});
+
+/* ===== ported race-on-race module (suspect race by victim race, CA SHR 1981-2022) ===== */
+const PRIM={"1981": {"AI/AN-AI/AN": 8, "AI/AN-Hispanic": 1, "AI/AN-White": 4, "Asian-Asian": 39, "Asian-Black": 3, "Asian-Hispanic": 8, "Asian-White": 14, "Black-AI/AN": 4, "Black-Asian": 11, "Black-Black": 621, "Black-Hispanic": 65, "Black-White": 98, "Hispanic-AI/AN": 2, "Hispanic-Asian": 9, "Hispanic-Black": 34, "Hispanic-Hispanic": 509, "Hispanic-White": 85, "White-AI/AN": 2, "White-Asian": 14, "White-Black": 42, "White-Hispanic": 70, "White-White": 614}, "1982": {"AI/AN-AI/AN": 7, "AI/AN-Black": 1, "AI/AN-Hispanic": 2, "AI/AN-White": 6, "Asian-AI/AN": 1, "Asian-Asian": 34, "Asian-Black": 6, "Asian-Hispanic": 10, "Asian-White": 20, "Black-Asian": 16, "Black-Black": 531, "Black-Hispanic": 63, "Black-White": 86, "Hispanic-AI/AN": 3, "Hispanic-Asian": 6, "Hispanic-Black": 39, "Hispanic-Hispanic": 490, "Hispanic-White": 95, "White-AI/AN": 8, "White-Asian": 12, "White-Black": 52, "White-Hispanic": 69, "White-White": 542}, "1983": {"AI/AN-AI/AN": 8, "AI/AN-Black": 1, "AI/AN-White": 5, "Asian-Asian": 41, "Asian-Black": 6, "Asian-Hispanic": 7, "Asian-White": 9, "Black-AI/AN": 3, "Black-Asian": 10, "Black-Black": 483, "Black-Hispanic": 58, "Black-White": 77, "Hispanic-AI/AN": 4, "Hispanic-Asian": 8, "Hispanic-Black": 31, "Hispanic-Hispanic": 475, "Hispanic-White": 69, "White-AI/AN": 1, "White-Asian": 9, "White-Black": 34, "White-Hispanic": 66, "White-White": 537}, "1984": {"AI/AN-AI/AN": 3, "AI/AN-Asian": 1, "AI/AN-Black": 1, "AI/AN-Hispanic": 3, "AI/AN-White": 7, "Asian-Asian": 29, "Asian-Black": 6, "Asian-Hispanic": 10, "Asian-White": 12, "Black-AI/AN": 1, "Black-Asian": 8, "Black-Black": 488, "Black-Hispanic": 30, "Black-White": 66, "Hispanic-AI/AN": 2, "Hispanic-Asian": 5, "Hispanic-Black": 41, "Hispanic-Hispanic": 429, "Hispanic-White": 87, "White-AI/AN": 3, "White-Asian": 13, "White-Black": 38, "White-Hispanic": 79, "White-White": 561}, "1985": {"AI/AN-AI/AN": 8, "AI/AN-Black": 1, "AI/AN-Hispanic": 2, "AI/AN-White": 4, "Asian-AI/AN": 1, "Asian-Asian": 52, "Asian-Black": 3, "Asian-Hispanic": 5, "Asian-White": 19, "Black-AI/AN": 1, "Black-Asian": 14, "Black-Black": 503, "Black-Hispanic": 61, "Black-White": 77, "Hispanic-AI/AN": 3, "Hispanic-Asian": 11, "Hispanic-Black": 33, "Hispanic-Hispanic": 480, "Hispanic-White": 66, "White-AI/AN": 3, "White-Asian": 21, "White-Black": 28, "White-Hispanic": 58, "White-White": 596}, "1986": {"AI/AN-AI/AN": 14, "AI/AN-Black": 1, "AI/AN-Hispanic": 2, "AI/AN-White": 1, "Asian-AI/AN": 1, "Asian-Asian": 37, "Asian-Black": 6, "Asian-Hispanic": 9, "Asian-White": 16, "Black-Asian": 12, "Black-Black": 561, "Black-Hispanic": 63, "Black-White": 82, "Hispanic-AI/AN": 3, "Hispanic-Asian": 11, "Hispanic-Black": 36, "Hispanic-Hispanic": 494, "Hispanic-White": 83, "White-AI/AN": 5, "White-Asian": 12, "White-Black": 51, "White-Hispanic": 63, "White-White": 581}, "1988": {"AI/AN-AI/AN": 8, "AI/AN-Black": 1, "AI/AN-Hispanic": 1, "AI/AN-White": 7, "Asian-Asian": 18, "Asian-Black": 1, "Asian-Hispanic": 3, "Asian-White": 7, "Black-AI/AN": 1, "Black-Asian": 7, "Black-Black": 564, "Black-Hispanic": 86, "Black-White": 107, "Hispanic-AI/AN": 1, "Hispanic-Asian": 6, "Hispanic-Black": 35, "Hispanic-Hispanic": 501, "Hispanic-White": 89, "White-AI/AN": 3, "White-Asian": 1, "White-Black": 50, "White-Hispanic": 73, "White-White": 574}, "1989": {"AI/AN-AI/AN": 4, "AI/AN-Asian": 1, "AI/AN-Hispanic": 2, "AI/AN-White": 2, "Asian-Asian": 11, "Asian-Black": 3, "Asian-Hispanic": 5, "Asian-White": 2, "Black-AI/AN": 1, "Black-Asian": 1, "Black-Black": 642, "Black-Hispanic": 96, "Black-White": 108, "Hispanic-AI/AN": 6, "Hispanic-Asian": 2, "Hispanic-Black": 70, "Hispanic-Hispanic": 664, "Hispanic-White": 99, "White-AI/AN": 4, "White-Asian": 4, "White-Black": 46, "White-Hispanic": 74, "White-White": 513}, "1990": {"AI/AN-AI/AN": 5, "AI/AN-Hispanic": 2, "AI/AN-White": 4, "Asian-Asian": 7, "Asian-Black": 2, "Asian-Hispanic": 6, "Asian-White": 3, "Black-AI/AN": 1, "Black-Asian": 2, "Black-Black": 636, "Black-Hispanic": 117, "Black-White": 81, "Hispanic-AI/AN": 3, "Hispanic-Asian": 7, "Hispanic-Black": 59, "Hispanic-Hispanic": 814, "Hispanic-White": 106, "White-AI/AN": 2, "White-Asian": 7, "White-Black": 51, "White-Hispanic": 79, "White-White": 505}, "1991": {"AI/AN-AI/AN": 5, "AI/AN-Asian": 1, "AI/AN-Hispanic": 6, "AI/AN-White": 4, "Asian-Asian": 51, "Asian-Black": 14, "Asian-Hispanic": 14, "Asian-White": 13, "Black-AI/AN": 1, "Black-Asian": 18, "Black-Black": 581, "Black-Hispanic": 101, "Black-White": 83, "Hispanic-AI/AN": 7, "Hispanic-Asian": 13, "Hispanic-Black": 66, "Hispanic-Hispanic": 732, "Hispanic-White": 102, "White-AI/AN": 5, "White-Asian": 17, "White-Black": 45, "White-Hispanic": 76, "White-White": 522}, "1992": {"AI/AN-AI/AN": 6, "AI/AN-Asian": 2, "AI/AN-Hispanic": 3, "AI/AN-White": 6, "Asian-Asian": 65, "Asian-Black": 7, "Asian-Hispanic": 10, "Asian-White": 11, "Black-AI/AN": 3, "Black-Asian": 11, "Black-Black": 520, "Black-Hispanic": 115, "Black-White": 95, "Hispanic-AI/AN": 2, "Hispanic-Asian": 24, "Hispanic-Black": 71, "Hispanic-Hispanic": 779, "Hispanic-White": 105, "White-Asian": 9, "White-Black": 41, "White-Hispanic": 76, "White-White": 471}, "1993": {"AI/AN-AI/AN": 9, "AI/AN-Black": 1, "AI/AN-Hispanic": 2, "AI/AN-White": 8, "Asian-Asian": 63, "Asian-Black": 10, "Asian-Hispanic": 10, "Asian-White": 12, "Black-AI/AN": 1, "Black-Asian": 20, "Black-Black": 610, "Black-Hispanic": 122, "Black-White": 110, "Hispanic-AI/AN": 2, "Hispanic-Asian": 18, "Hispanic-Black": 78, "Hispanic-Hispanic": 794, "Hispanic-White": 119, "White-AI/AN": 1, "White-Asian": 6, "White-Black": 54, "White-Hispanic": 87, "White-White": 506}, "1994": {"AI/AN-AI/AN": 6, "AI/AN-Black": 1, "AI/AN-Hispanic": 4, "AI/AN-White": 2, "Asian-Asian": 55, "Asian-Black": 6, "Asian-Hispanic": 18, "Asian-White": 13, "Black-AI/AN": 1, "Black-Asian": 9, "Black-Black": 577, "Black-Hispanic": 129, "Black-White": 66, "Hispanic-AI/AN": 1, "Hispanic-Asian": 17, "Hispanic-Black": 87, "Hispanic-Hispanic": 794, "Hispanic-White": 90, "White-AI/AN": 6, "White-Asian": 15, "White-Black": 38, "White-Hispanic": 84, "White-White": 446}, "1995": {"AI/AN-AI/AN": 11, "AI/AN-Black": 2, "AI/AN-Hispanic": 3, "AI/AN-White": 5, "Asian-AI/AN": 1, "Asian-Asian": 68, "Asian-Black": 2, "Asian-Hispanic": 14, "Asian-White": 9, "Black-AI/AN": 2, "Black-Asian": 18, "Black-Black": 420, "Black-Hispanic": 99, "Black-White": 62, "Hispanic-AI/AN": 1, "Hispanic-Asian": 6, "Hispanic-Black": 60, "Hispanic-Hispanic": 753, "Hispanic-White": 96, "White-AI/AN": 3, "White-Asian": 6, "White-Black": 34, "White-Hispanic": 54, "White-White": 370}, "1996": {"AI/AN-AI/AN": 1, "AI/AN-Black": 4, "AI/AN-Hispanic": 1, "AI/AN-White": 4, "Asian-Asian": 55, "Asian-Black": 3, "Asian-Hispanic": 10, "Asian-White": 13, "Black-Asian": 15, "Black-Black": 357, "Black-Hispanic": 65, "Black-White": 47, "Hispanic-AI/AN": 3, "Hispanic-Asian": 11, "Hispanic-Black": 64, "Hispanic-Hispanic": 635, "Hispanic-White": 94, "White-Asian": 12, "White-Black": 26, "White-Hispanic": 71, "White-White": 321}, "1997": {"AI/AN-AI/AN": 3, "AI/AN-White": 2, "Asian-AI/AN": 1, "Asian-Asian": 49, "Asian-Black": 5, "Asian-Hispanic": 3, "Asian-White": 4, "Black-AI/AN": 2, "Black-Asian": 11, "Black-Black": 268, "Black-Hispanic": 49, "Black-White": 53, "Hispanic-AI/AN": 1, "Hispanic-Asian": 11, "Hispanic-Black": 43, "Hispanic-Hispanic": 522, "Hispanic-White": 63, "White-AI/AN": 2, "White-Asian": 7, "White-Black": 31, "White-Hispanic": 50, "White-White": 299}, "1998": {"AI/AN-AI/AN": 1, "AI/AN-Hispanic": 5, "AI/AN-White": 2, "Asian-Asian": 35, "Asian-Black": 4, "Asian-Hispanic": 7, "Asian-White": 10, "Black-AI/AN": 1, "Black-Asian": 9, "Black-Black": 265, "Black-Hispanic": 49, "Black-White": 47, "Hispanic-AI/AN": 4, "Hispanic-Asian": 12, "Hispanic-Black": 37, "Hispanic-Hispanic": 485, "Hispanic-White": 85, "White-AI/AN": 1, "White-Asian": 14, "White-Black": 26, "White-Hispanic": 41, "White-White": 284}, "1999": {"AI/AN-AI/AN": 5, "AI/AN-Hispanic": 2, "AI/AN-White": 3, "Asian-AI/AN": 1, "Asian-Asian": 55, "Asian-Black": 3, "Asian-Hispanic": 3, "Asian-White": 10, "Black-AI/AN": 1, "Black-Asian": 8, "Black-Black": 203, "Black-Hispanic": 39, "Black-White": 35, "Hispanic-AI/AN": 1, "Hispanic-Asian": 9, "Hispanic-Black": 32, "Hispanic-Hispanic": 427, "Hispanic-White": 55, "White-AI/AN": 2, "White-Asian": 10, "White-Black": 23, "White-Hispanic": 46, "White-White": 241}, "2000": {"AI/AN-AI/AN": 2, "AI/AN-Hispanic": 3, "AI/AN-White": 2, "Asian-Asian": 28, "Asian-Black": 1, "Asian-Hispanic": 6, "Asian-White": 6, "Black-AI/AN": 1, "Black-Asian": 9, "Black-Black": 252, "Black-Hispanic": 57, "Black-White": 38, "Hispanic-AI/AN": 1, "Hispanic-Asian": 6, "Hispanic-Black": 36, "Hispanic-Hispanic": 452, "Hispanic-White": 53, "White-AI/AN": 1, "White-Asian": 5, "White-Black": 21, "White-Hispanic": 45, "White-White": 261}, "2001": {"AI/AN-AI/AN": 2, "AI/AN-Hispanic": 1, "Asian-Asian": 30, "Asian-Black": 5, "Asian-Hispanic": 1, "Asian-White": 3, "Black-AI/AN": 1, "Black-Asian": 10, "Black-Black": 257, "Black-Hispanic": 32, "Black-White": 36, "Hispanic-Asian": 8, "Hispanic-Black": 47, "Hispanic-Hispanic": 478, "Hispanic-White": 44, "White-AI/AN": 2, "White-Asian": 21, "White-Black": 22, "White-Hispanic": 73, "White-White": 271}, "2002": {"AI/AN-AI/AN": 2, "AI/AN-Black": 1, "AI/AN-Hispanic": 2, "AI/AN-White": 4, "Asian-Asian": 49, "Asian-Black": 2, "Asian-Hispanic": 6, "Asian-White": 6, "Black-AI/AN": 1, "Black-Asian": 5, "Black-Black": 312, "Black-Hispanic": 51, "Black-White": 37, "Hispanic-AI/AN": 1, "Hispanic-Asian": 8, "Hispanic-Black": 45, "Hispanic-Hispanic": 537, "Hispanic-White": 62, "White-AI/AN": 3, "White-Asian": 15, "White-Black": 20, "White-Hispanic": 77, "White-White": 251}, "2003": {"AI/AN-AI/AN": 6, "AI/AN-Asian": 1, "AI/AN-Hispanic": 2, "AI/AN-White": 1, "Asian-AI/AN": 1, "Asian-Asian": 48, "Asian-Black": 4, "Asian-Hispanic": 4, "Asian-White": 7, "Black-AI/AN": 1, "Black-Asian": 6, "Black-Black": 278, "Black-Hispanic": 55, "Black-White": 44, "Hispanic-Asian": 10, "Hispanic-Black": 46, "Hispanic-Hispanic": 426, "Hispanic-White": 61, "White-AI/AN": 2, "White-Asian": 13, "White-Black": 33, "White-Hispanic": 85, "White-White": 275}, "2004": {"AI/AN-AI/AN": 1, "AI/AN-Hispanic": 2, "AI/AN-White": 1, "Asian-Asian": 48, "Asian-Black": 11, "Asian-Hispanic": 4, "Asian-White": 5, "Black-AI/AN": 1, "Black-Asian": 4, "Black-Black": 289, "Black-Hispanic": 45, "Black-White": 27, "Hispanic-AI/AN": 2, "Hispanic-Asian": 10, "Hispanic-Black": 39, "Hispanic-Hispanic": 426, "Hispanic-White": 47, "White-AI/AN": 3, "White-Asian": 17, "White-Black": 34, "White-Hispanic": 73, "White-White": 246}, "2005": {"AI/AN-AI/AN": 1, "AI/AN-Black": 2, "AI/AN-Hispanic": 2, "AI/AN-White": 3, "Asian-Asian": 48, "Asian-Black": 4, "Asian-Hispanic": 13, "Asian-White": 12, "Black-AI/AN": 1, "Black-Asian": 14, "Black-Black": 301, "Black-Hispanic": 58, "Black-White": 23, "Hispanic-Asian": 11, "Hispanic-Black": 50, "Hispanic-Hispanic": 501, "Hispanic-White": 61, "White-AI/AN": 2, "White-Asian": 9, "White-Black": 34, "White-Hispanic": 66, "White-White": 249}, "2006": {"AI/AN-AI/AN": 2, "AI/AN-Asian": 1, "AI/AN-Hispanic": 2, "AI/AN-White": 2, "Asian-Asian": 45, "Asian-Black": 1, "Asian-Hispanic": 15, "Asian-White": 12, "Black-AI/AN": 3, "Black-Asian": 7, "Black-Black": 279, "Black-Hispanic": 65, "Black-White": 36, "Hispanic-AI/AN": 4, "Hispanic-Asian": 10, "Hispanic-Black": 40, "Hispanic-Hispanic": 524, "Hispanic-White": 69, "White-AI/AN": 1, "White-Asian": 13, "White-Black": 36, "White-Hispanic": 80, "White-White": 226}, "2007": {"AI/AN-Hispanic": 3, "AI/AN-White": 4, "Asian-Asian": 29, "Asian-Black": 2, "Asian-Hispanic": 9, "Asian-White": 8, "Black-Asian": 3, "Black-Black": 194, "Black-Hispanic": 60, "Black-White": 27, "Hispanic-AI/AN": 2, "Hispanic-Asian": 9, "Hispanic-Black": 40, "Hispanic-Hispanic": 392, "Hispanic-White": 63, "White-AI/AN": 2, "White-Asian": 7, "White-Black": 33, "White-Hispanic": 47, "White-White": 190}, "2008": {"AI/AN-AI/AN": 4, "AI/AN-Hispanic": 1, "AI/AN-White": 1, "Asian-Asian": 47, "Asian-Black": 1, "Asian-Hispanic": 5, "Asian-White": 10, "Black-Asian": 6, "Black-Black": 173, "Black-Hispanic": 37, "Black-White": 22, "Hispanic-AI/AN": 3, "Hispanic-Asian": 9, "Hispanic-Black": 30, "Hispanic-Hispanic": 445, "Hispanic-White": 45, "White-AI/AN": 4, "White-Asian": 6, "White-Black": 36, "White-Hispanic": 57, "White-White": 205}, "2009": {"AI/AN-AI/AN": 1, "AI/AN-Hispanic": 1, "AI/AN-White": 2, "Asian-Asian": 33, "Asian-Black": 5, "Asian-Hispanic": 6, "Asian-White": 6, "Black-Asian": 4, "Black-Black": 193, "Black-Hispanic": 33, "Black-White": 29, "Hispanic-AI/AN": 3, "Hispanic-Asian": 7, "Hispanic-Black": 36, "Hispanic-Hispanic": 441, "Hispanic-White": 50, "White-AI/AN": 2, "White-Asian": 9, "White-Black": 26, "White-Hispanic": 61, "White-White": 211}, "2010": {"AI/AN-AI/AN": 4, "AI/AN-Black": 1, "AI/AN-Hispanic": 2, "AI/AN-White": 3, "Asian-Asian": 34, "Asian-Black": 3, "Asian-Hispanic": 10, "Asian-White": 11, "Black-Asian": 4, "Black-Black": 163, "Black-Hispanic": 31, "Black-White": 30, "Hispanic-AI/AN": 2, "Hispanic-Asian": 4, "Hispanic-Black": 35, "Hispanic-Hispanic": 367, "Hispanic-White": 46, "White-AI/AN": 1, "White-Asian": 16, "White-Black": 25, "White-Hispanic": 41, "White-White": 190}, "2011": {"AI/AN-AI/AN": 3, "AI/AN-Black": 1, "AI/AN-Hispanic": 2, "AI/AN-White": 1, "Asian-Asian": 36, "Asian-Black": 6, "Asian-Hispanic": 7, "Asian-White": 8, "Black-Asian": 14, "Black-Black": 159, "Black-Hispanic": 38, "Black-White": 36, "Hispanic-AI/AN": 1, "Hispanic-Asian": 14, "Hispanic-Black": 36, "Hispanic-Hispanic": 330, "Hispanic-White": 41, "White-Asian": 9, "White-Black": 22, "White-Hispanic": 53, "White-White": 227}, "2012": {"AI/AN-AI/AN": 3, "AI/AN-Asian": 1, "AI/AN-Hispanic": 2, "AI/AN-White": 1, "Asian-Asian": 46, "Asian-Black": 6, "Asian-Hispanic": 4, "Asian-White": 6, "Black-Asian": 15, "Black-Black": 206, "Black-Hispanic": 37, "Black-White": 36, "Hispanic-Asian": 5, "Hispanic-Black": 30, "Hispanic-Hispanic": 361, "Hispanic-White": 52, "White-AI/AN": 2, "White-Asian": 13, "White-Black": 25, "White-Hispanic": 50, "White-White": 228}, "2013": {"AI/AN-Hispanic": 1, "AI/AN-White": 1, "Asian-Asian": 22, "Asian-Black": 3, "Asian-Hispanic": 8, "Asian-White": 4, "Black-AI/AN": 2, "Black-Asian": 7, "Black-Black": 168, "Black-Hispanic": 33, "Black-White": 33, "Hispanic-AI/AN": 1, "Hispanic-Asian": 5, "Hispanic-Black": 28, "Hispanic-Hispanic": 318, "Hispanic-White": 58, "White-AI/AN": 1, "White-Asian": 6, "White-Black": 29, "White-Hispanic": 62, "White-White": 228}, "2014": {"AI/AN-AI/AN": 6, "AI/AN-Hispanic": 1, "AI/AN-White": 1, "Asian-Asian": 24, "Asian-Black": 6, "Asian-Hispanic": 6, "Asian-White": 5, "Black-Asian": 5, "Black-Black": 186, "Black-Hispanic": 42, "Black-White": 28, "Hispanic-Asian": 9, "Hispanic-Black": 39, "Hispanic-Hispanic": 307, "Hispanic-White": 60, "White-AI/AN": 2, "White-Asian": 15, "White-Black": 21, "White-Hispanic": 43, "White-White": 234}, "2015": {"AI/AN-AI/AN": 4, "AI/AN-Black": 1, "AI/AN-Hispanic": 1, "AI/AN-White": 1, "Asian-Asian": 31, "Asian-Black": 7, "Asian-Hispanic": 9, "Asian-White": 3, "Black-AI/AN": 1, "Black-Asian": 7, "Black-Black": 186, "Black-Hispanic": 47, "Black-White": 35, "Hispanic-AI/AN": 4, "Hispanic-Asian": 9, "Hispanic-Black": 47, "Hispanic-Hispanic": 319, "Hispanic-White": 60, "White-AI/AN": 1, "White-Asian": 8, "White-Black": 26, "White-Hispanic": 60, "White-White": 248}, "2016": {"AI/AN-AI/AN": 6, "AI/AN-Black": 1, "AI/AN-Hispanic": 1, "AI/AN-White": 4, "Asian-Asian": 33, "Asian-Black": 5, "Asian-Hispanic": 4, "Asian-White": 6, "Black-Asian": 13, "Black-Black": 210, "Black-Hispanic": 30, "Black-White": 36, "Hispanic-AI/AN": 1, "Hispanic-Asian": 7, "Hispanic-Black": 48, "Hispanic-Hispanic": 345, "Hispanic-White": 53, "White-AI/AN": 2, "White-Asian": 10, "White-Black": 25, "White-Hispanic": 49, "White-White": 207}, "2017": {"AI/AN-AI/AN": 5, "AI/AN-White": 3, "Asian-Asian": 27, "Asian-Black": 9, "Asian-Hispanic": 8, "Asian-White": 8, "Black-Asian": 13, "Black-Black": 170, "Black-Hispanic": 35, "Black-White": 29, "Hispanic-AI/AN": 4, "Hispanic-Asian": 9, "Hispanic-Black": 44, "Hispanic-Hispanic": 315, "Hispanic-White": 67, "White-AI/AN": 3, "White-Asian": 17, "White-Black": 23, "White-Hispanic": 65, "White-White": 197}, "2018": {"AI/AN-AI/AN": 4, "AI/AN-Asian": 1, "AI/AN-Black": 1, "AI/AN-White": 5, "Asian-Asian": 38, "Asian-Black": 3, "Asian-Hispanic": 6, "Asian-White": 4, "Black-Asian": 7, "Black-Black": 163, "Black-Hispanic": 49, "Black-White": 42, "Hispanic-AI/AN": 2, "Hispanic-Asian": 7, "Hispanic-Black": 37, "Hispanic-Hispanic": 346, "Hispanic-White": 51, "White-AI/AN": 1, "White-Asian": 6, "White-Black": 23, "White-Hispanic": 60, "White-White": 214}, "2019": {"AI/AN-AI/AN": 1, "AI/AN-Hispanic": 1, "AI/AN-White": 1, "Asian-Asian": 30, "Asian-Black": 4, "Asian-Hispanic": 4, "Asian-White": 6, "Black-Asian": 9, "Black-Black": 180, "Black-Hispanic": 36, "Black-White": 33, "Hispanic-AI/AN": 1, "Hispanic-Asian": 8, "Hispanic-Black": 29, "Hispanic-Hispanic": 341, "Hispanic-White": 52, "White-AI/AN": 3, "White-Asian": 8, "White-Black": 23, "White-Hispanic": 56, "White-White": 196}, "2020": {"AI/AN-AI/AN": 3, "AI/AN-Asian": 1, "AI/AN-Black": 1, "AI/AN-Hispanic": 1, "AI/AN-White": 1, "Asian-Asian": 33, "Asian-Black": 5, "Asian-Hispanic": 8, "Asian-White": 6, "Black-AI/AN": 1, "Black-Asian": 12, "Black-Black": 223, "Black-Hispanic": 61, "Black-White": 45, "Hispanic-AI/AN": 1, "Hispanic-Asian": 8, "Hispanic-Black": 42, "Hispanic-Hispanic": 398, "Hispanic-White": 67, "White-AI/AN": 2, "White-Asian": 10, "White-Black": 21, "White-Hispanic": 53, "White-White": 179}, "2022": {"AI/AN-AI/AN": 1, "Asian-Asian": 25, "Asian-Black": 6, "Asian-Hispanic": 6, "Asian-White": 6, "Black-Asian": 11, "Black-Black": 224, "Black-Hispanic": 63, "Black-White": 36, "Hispanic-Asian": 12, "Hispanic-Black": 46, "Hispanic-Hispanic": 405, "Hispanic-White": 59, "White-AI/AN": 1, "White-Asian": 4, "White-Black": 15, "White-Hispanic": 54, "White-White": 138}};
+const DYAD={"1981": {"White-White": 712, "Hispanic-White": 120, "Black-Black": 712, "Asian-White": 18, "White-Hispanic": 85, "Asian-Asian": 46, "White-Black": 50, "Black-White": 140, "Hispanic-Hispanic": 662, "AI/AN-White": 6, "Black-Asian": 18, "Black-AI/AN": 7, "Black-Hispanic": 96, "AI/AN-AI/AN": 8, "Hispanic-Asian": 10, "Hispanic-Black": 46, "White-Asian": 17, "White-AI/AN": 2, "Asian-Hispanic": 12, "Asian-Black": 3, "Hispanic-AI/AN": 2, "AI/AN-Black": 1, "AI/AN-Hispanic": 1}, "1982": {"White-White": 617, "Hispanic-Hispanic": 603, "Black-White": 120, "White-Hispanic": 74, "Hispanic-White": 113, "Black-Black": 625, "Black-Asian": 27, "White-Black": 60, "Asian-Asian": 41, "AI/AN-White": 8, "Black-Hispanic": 89, "Asian-Hispanic": 12, "White-Asian": 15, "AI/AN-AI/AN": 8, "Hispanic-Black": 49, "White-AI/AN": 11, "AI/AN-Hispanic": 3, "Hispanic-AI/AN": 3, "Hispanic-Asian": 9, "Asian-White": 23, "Asian-Black": 11, "AI/AN-Black": 1, "Asian-AI/AN": 2}, "1983": {"White-White": 636, "Hispanic-White": 96, "Black-Hispanic": 80, "Black-Black": 591, "Black-White": 112, "Hispanic-Hispanic": 639, "White-Black": 35, "Asian-Asian": 42, "Hispanic-Asian": 10, "Black-Asian": 16, "Hispanic-Black": 39, "White-Hispanic": 87, "Asian-White": 10, "White-Asian": 11, "Black-AI/AN": 4, "Asian-Hispanic": 9, "AI/AN-AI/AN": 12, "AI/AN-White": 8, "Hispanic-AI/AN": 4, "Asian-Black": 6, "AI/AN-Hispanic": 2, "AI/AN-Black": 3, "White-AI/AN": 1}, "1984": {"Black-White": 85, "White-Hispanic": 92, "Black-Hispanic": 40, "White-White": 640, "Asian-White": 16, "Asian-Asian": 31, "Hispanic-Hispanic": 578, "Black-Black": 588, "Asian-Hispanic": 10, "Hispanic-White": 105, "Hispanic-Black": 51, "White-Asian": 18, "Black-Asian": 9, "White-Black": 40, "AI/AN-White": 9, "AI/AN-Hispanic": 3, "Hispanic-Asian": 14, "Hispanic-AI/AN": 3, "Asian-Black": 6, "Black-AI/AN": 2, "White-AI/AN": 3, "AI/AN-AI/AN": 4, "AI/AN-Black": 1, "AI/AN-Asian": 1}, "1985": {"White-White": 660, "Black-Black": 612, "Hispanic-Hispanic": 614, "Black-White": 97, "White-Black": 32, "Asian-Asian": 60, "Hispanic-White": 90, "Black-Asian": 22, "Hispanic-Black": 48, "Black-Hispanic": 91, "White-Asian": 21, "Asian-White": 39, "Asian-Black": 6, "White-Hispanic": 65, "Asian-Hispanic": 5, "White-AI/AN": 6, "AI/AN-White": 6, "AI/AN-AI/AN": 12, "Hispanic-Asian": 13, "Hispanic-AI/AN": 3, "Black-AI/AN": 1, "AI/AN-Hispanic": 2, "AI/AN-Black": 1, "Asian-AI/AN": 1}, "1986": {"White-White": 667, "Black-White": 105, "Black-Black": 669, "Asian-Asian": 43, "Hispanic-White": 107, "White-Asian": 16, "White-Hispanic": 80, "Hispanic-Hispanic": 632, "Black-Asian": 18, "Asian-Black": 8, "White-Black": 59, "Hispanic-AI/AN": 4, "Asian-Hispanic": 14, "AI/AN-AI/AN": 14, "Black-Hispanic": 84, "Hispanic-Black": 49, "Asian-White": 18, "Hispanic-Asian": 14, "AI/AN-White": 2, "AI/AN-Hispanic": 3, "White-AI/AN": 5, "AI/AN-Black": 1, "Asian-AI/AN": 1}, "1988": {"White-White": 653, "Hispanic-Hispanic": 690, "Hispanic-White": 119, "Black-Black": 769, "Black-White": 146, "Black-Asian": 10, "Asian-Asian": 19, "White-Black": 58, "AI/AN-White": 9, "AI/AN-AI/AN": 8, "White-Hispanic": 96, "Hispanic-Black": 46, "Black-Hispanic": 126, "Asian-White": 7, "Hispanic-Asian": 9, "Black-AI/AN": 4, "Asian-Black": 1, "Hispanic-AI/AN": 2, "White-Asian": 2, "White-AI/AN": 4, "AI/AN-Black": 1, "Asian-Hispanic": 3, "AI/AN-Hispanic": 1}, "1989": {"Black-Black": 899, "White-White": 577, "Black-White": 158, "White-Black": 57, "Hispanic-Hispanic": 969, "Hispanic-White": 134, "White-Hispanic": 93, "White-Asian": 4, "Hispanic-Black": 110, "Black-Hispanic": 152, "Asian-Black": 3, "Asian-Asian": 13, "White-AI/AN": 5, "AI/AN-AI/AN": 8, "AI/AN-Hispanic": 2, "Asian-Hispanic": 12, "Hispanic-Asian": 3, "Asian-White": 2, "AI/AN-White": 2, "Hispanic-AI/AN": 10, "Black-AI/AN": 3, "AI/AN-Asian": 2, "Black-Asian": 3}, "1990": {"White-White": 585, "Hispanic-White": 154, "Black-White": 118, "White-Black": 63, "Black-Black": 880, "White-Hispanic": 117, "Hispanic-Black": 96, "Hispanic-Hispanic": 1199, "Black-Hispanic": 206, "AI/AN-White": 8, "AI/AN-Hispanic": 4, "Hispanic-AI/AN": 4, "White-Asian": 8, "AI/AN-AI/AN": 6, "Asian-Hispanic": 15, "Hispanic-Asian": 8, "Black-Asian": 2, "Asian-Asian": 7, "White-AI/AN": 2, "Asian-White": 4, "AI/AN-Black": 1, "Black-AI/AN": 1, "Asian-Black": 6}, "1991": {"Hispanic-White": 143, "Black-Black": 739, "Hispanic-Hispanic": 1042, "Hispanic-Black": 90, "White-White": 619, "Asian-Asian": 69, "White-Asian": 20, "White-Black": 55, "Black-Asian": 29, "Black-White": 121, "Black-Hispanic": 154, "White-Hispanic": 94, "AI/AN-Hispanic": 6, "Asian-Black": 19, "Asian-White": 17, "AI/AN-White": 4, "AI/AN-Asian": 1, "Hispanic-AI/AN": 11, "AI/AN-AI/AN": 6, "Hispanic-Asian": 19, "White-AI/AN": 7, "Asian-Hispanic": 20, "Black-AI/AN": 1}, "1992": {"Hispanic-Hispanic": 1057, "White-Hispanic": 96, "Black-Black": 648, "Hispanic-White": 162, "Asian-White": 12, "Black-White": 138, "White-White": 546, "White-Black": 50, "Black-Hispanic": 152, "Asian-Black": 11, "AI/AN-White": 10, "Asian-Asian": 81, "Asian-Hispanic": 13, "AI/AN-Hispanic": 4, "Hispanic-Asian": 37, "Hispanic-AI/AN": 2, "Hispanic-Black": 105, "AI/AN-Asian": 2, "Black-AI/AN": 5, "AI/AN-AI/AN": 6, "Black-Asian": 19, "White-Asian": 15}, "1993": {"Hispanic-White": 166, "White-Hispanic": 113, "Black-White": 146, "Hispanic-Hispanic": 1080, "Black-Hispanic": 189, "AI/AN-AI/AN": 12, "White-White": 567, "Asian-White": 24, "Black-AI/AN": 2, "White-Black": 63, "Black-Black": 798, "Hispanic-Asian": 36, "Hispanic-Black": 121, "Asian-Asian": 86, "Asian-Black": 10, "AI/AN-White": 9, "AI/AN-Hispanic": 3, "Asian-Hispanic": 19, "Black-Asian": 31, "White-Asian": 12, "Hispanic-AI/AN": 2, "AI/AN-Black": 1, "White-AI/AN": 1}, "1994": {"Hispanic-White": 126, "Black-Black": 725, "Black-White": 97, "Asian-White": 18, "White-White": 521, "Asian-Asian": 82, "White-Hispanic": 106, "White-Black": 48, "Hispanic-Hispanic": 1076, "White-AI/AN": 6, "Black-Hispanic": 191, "Hispanic-Black": 116, "Asian-Black": 6, "AI/AN-White": 4, "Hispanic-Asian": 26, "Asian-Hispanic": 26, "AI/AN-AI/AN": 6, "White-Asian": 22, "AI/AN-Hispanic": 4, "Black-Asian": 14, "Black-AI/AN": 2, "AI/AN-Black": 1, "Hispanic-AI/AN": 1}, "1995": {"Black-Black": 512, "White-White": 418, "Hispanic-Hispanic": 1034, "Hispanic-White": 144, "Black-Hispanic": 147, "White-Hispanic": 72, "Hispanic-Black": 91, "Black-White": 84, "AI/AN-Hispanic": 3, "Asian-Asian": 102, "White-Asian": 12, "White-Black": 54, "Asian-Hispanic": 19, "Black-Asian": 26, "AI/AN-AI/AN": 12, "AI/AN-White": 6, "Hispanic-Asian": 11, "AI/AN-Black": 2, "Asian-Black": 2, "Asian-White": 13, "Black-AI/AN": 6, "White-AI/AN": 3, "Asian-AI/AN": 2, "Hispanic-AI/AN": 2}, "1996": {"Black-Asian": 24, "Black-Hispanic": 97, "White-White": 369, "Black-White": 67, "Hispanic-Black": 92, "Black-Black": 467, "Hispanic-White": 125, "Hispanic-Hispanic": 888, "Asian-Asian": 79, "White-Black": 30, "AI/AN-Black": 4, "White-Hispanic": 97, "White-Asian": 17, "Asian-White": 20, "Asian-Hispanic": 13, "Hispanic-AI/AN": 3, "AI/AN-Hispanic": 1, "AI/AN-White": 4, "Hispanic-Asian": 15, "Asian-Black": 4, "AI/AN-AI/AN": 1}, "1997": {"White-White": 338, "White-Hispanic": 59, "Hispanic-White": 98, "Black-Black": 340, "Hispanic-Asian": 16, "Black-White": 72, "Asian-White": 8, "Hispanic-Black": 63, "Black-Hispanic": 68, "Asian-Asian": 63, "Hispanic-Hispanic": 769, "Asian-Black": 8, "White-Asian": 11, "White-Black": 39, "Asian-Hispanic": 3, "White-AI/AN": 2, "Black-AI/AN": 3, "AI/AN-AI/AN": 4, "AI/AN-White": 3, "Black-Asian": 14, "Asian-AI/AN": 1, "Hispanic-AI/AN": 2}, "1998": {"Hispanic-White": 109, "White-White": 351, "Hispanic-Asian": 16, "Black-White": 64, "Asian-Asian": 52, "Black-Black": 333, "Hispanic-Hispanic": 670, "White-Asian": 19, "White-Black": 30, "Black-Hispanic": 63, "Hispanic-Black": 58, "Black-AI/AN": 1, "White-Hispanic": 51, "Asian-White": 13, "AI/AN-White": 5, "AI/AN-Hispanic": 5, "Asian-Black": 6, "Black-Asian": 17, "Asian-Hispanic": 8, "Hispanic-AI/AN": 4, "Asian-AI/AN": 1, "White-AI/AN": 1, "AI/AN-AI/AN": 1}, "1999": {"Hispanic-Hispanic": 584, "White-Asian": 12, "White-White": 285, "Hispanic-White": 76, "Black-Black": 233, "Black-White": 45, "White-Hispanic": 60, "Asian-Asian": 61, "White-AI/AN": 2, "Black-Hispanic": 45, "White-Black": 30, "Black-AI/AN": 1, "Black-Asian": 12, "AI/AN-AI/AN": 10, "Hispanic-Black": 44, "Hispanic-AI/AN": 1, "Asian-White": 11, "AI/AN-Hispanic": 2, "Hispanic-Asian": 9, "Asian-Hispanic": 3, "AI/AN-White": 5, "Asian-Black": 6, "Asian-AI/AN": 4}, "2000": {"White-White": 316, "Black-Black": 309, "White-Asian": 7, "White-Black": 29, "Asian-Asian": 43, "Hispanic-White": 73, "White-Hispanic": 54, "Black-Hispanic": 81, "Black-White": 50, "Black-Asian": 10, "Hispanic-Hispanic": 611, "Hispanic-Black": 54, "Asian-Hispanic": 7, "Hispanic-Asian": 7, "AI/AN-Hispanic": 3, "Black-AI/AN": 1, "Asian-White": 7, "AI/AN-AI/AN": 2, "AI/AN-White": 2, "Asian-Black": 1, "Hispanic-AI/AN": 1, "White-AI/AN": 1}, "2001": {"White-White": 308, "Hispanic-White": 70, "White-Asian": 23, "AI/AN-Asian": 1, "Black-White": 47, "Black-Black": 338, "Hispanic-Hispanic": 651, "Hispanic-Black": 74, "Black-Hispanic": 49, "White-Hispanic": 85, "Asian-Asian": 37, "White-Black": 30, "Black-Asian": 17, "AI/AN-AI/AN": 3, "Hispanic-Asian": 14, "Asian-Black": 7, "Asian-White": 4, "Asian-Hispanic": 1, "Black-AI/AN": 2, "White-AI/AN": 2, "AI/AN-Hispanic": 1, "AI/AN-White": 1}, "2002": {"Hispanic-Black": 62, "Black-Black": 404, "Asian-Asian": 59, "White-White": 284, "Hispanic-Hispanic": 776, "Black-Hispanic": 73, "White-Hispanic": 90, "Black-White": 45, "Black-Asian": 7, "White-Black": 23, "Hispanic-White": 92, "White-Asian": 17, "Hispanic-Asian": 11, "Hispanic-AI/AN": 1, "White-AI/AN": 3, "AI/AN-White": 6, "Black-AI/AN": 1, "Asian-Hispanic": 15, "Asian-Black": 4, "AI/AN-AI/AN": 2, "Asian-White": 6, "AI/AN-Hispanic": 2, "AI/AN-Black": 1}, "2003": {"Black-Black": 356, "Hispanic-Hispanic": 543, "White-White": 318, "White-Asian": 14, "White-Hispanic": 98, "White-Black": 38, "Hispanic-Black": 60, "Black-White": 53, "Black-Asian": 8, "Black-Hispanic": 74, "Asian-Black": 11, "Black-AI/AN": 1, "Asian-Asian": 63, "Hispanic-White": 85, "AI/AN-AI/AN": 6, "Hispanic-Asian": 12, "Asian-Hispanic": 7, "White-AI/AN": 5, "AI/AN-Hispanic": 2, "AI/AN-Asian": 1, "AI/AN-White": 2, "Asian-White": 13, "Asian-AI/AN": 1}, "2004": {"White-White": 278, "Hispanic-Hispanic": 573, "White-Hispanic": 81, "White-Asian": 20, "Black-White": 39, "Black-Black": 375, "Asian-Black": 19, "Hispanic-White": 72, "Asian-Asian": 55, "White-Black": 37, "Hispanic-Black": 58, "AI/AN-Hispanic": 2, "Black-Hispanic": 66, "Asian-White": 7, "Hispanic-Asian": 19, "Asian-Hispanic": 5, "Black-Asian": 7, "AI/AN-AI/AN": 1, "Hispanic-AI/AN": 2, "White-AI/AN": 3, "Black-AI/AN": 1, "AI/AN-White": 1}, "2005": {"Black-Black": 371, "Hispanic-Hispanic": 668, "Hispanic-White": 86, "Black-White": 35, "Black-Asian": 20, "White-Hispanic": 89, "White-White": 281, "Asian-Asian": 69, "Black-Hispanic": 79, "White-Black": 44, "Asian-White": 16, "Hispanic-Asian": 13, "White-Asian": 11, "Hispanic-Black": 66, "AI/AN-White": 3, "AI/AN-Black": 2, "Asian-Black": 9, "Asian-Hispanic": 13, "White-AI/AN": 2, "AI/AN-Hispanic": 3, "Black-AI/AN": 1, "AI/AN-AI/AN": 1}, "2006": {"Hispanic-Hispanic": 704, "White-Hispanic": 108, "Black-Black": 375, "White-White": 254, "Black-White": 46, "Hispanic-White": 97, "Asian-Asian": 60, "Black-Hispanic": 92, "White-Asian": 14, "Black-Asian": 11, "White-Black": 43, "Asian-Hispanic": 26, "Asian-White": 15, "AI/AN-AI/AN": 3, "Hispanic-Asian": 16, "Hispanic-Black": 54, "AI/AN-White": 2, "Black-AI/AN": 5, "Hispanic-AI/AN": 5, "AI/AN-Hispanic": 3, "Asian-Black": 2, "AI/AN-Asian": 2, "White-AI/AN": 1}, "2007": {"Hispanic-Hispanic": 551, "Hispanic-White": 82, "Asian-Asian": 31, "White-White": 222, "White-Black": 45, "Black-Black": 242, "Black-White": 34, "Hispanic-Black": 56, "Hispanic-AI/AN": 2, "White-Hispanic": 54, "Black-Hispanic": 78, "White-Asian": 7, "AI/AN-White": 4, "AI/AN-Hispanic": 3, "Hispanic-Asian": 11, "Asian-White": 11, "Asian-Hispanic": 11, "Asian-Black": 3, "Black-Asian": 4, "White-AI/AN": 2}, "2008": {"White-White": 240, "Asian-Hispanic": 7, "Black-White": 34, "Black-Black": 216, "White-Black": 44, "Hispanic-Hispanic": 607, "Asian-Asian": 55, "Asian-White": 11, "AI/AN-AI/AN": 5, "White-Hispanic": 65, "Hispanic-White": 69, "Hispanic-Black": 38, "White-AI/AN": 4, "Black-Hispanic": 58, "Hispanic-Asian": 9, "White-Asian": 7, "Hispanic-AI/AN": 3, "Black-Asian": 8, "Asian-Black": 4, "AI/AN-Hispanic": 2, "AI/AN-White": 1}, "2009": {"White-Hispanic": 76, "Hispanic-Hispanic": 604, "Black-White": 33, "White-White": 246, "Black-Black": 241, "Black-Asian": 4, "Asian-Black": 6, "White-Black": 32, "Asian-Asian": 36, "Asian-White": 8, "Black-Hispanic": 41, "Hispanic-Black": 47, "Hispanic-White": 65, "Asian-Hispanic": 7, "White-AI/AN": 2, "AI/AN-Hispanic": 2, "Hispanic-AI/AN": 3, "AI/AN-AI/AN": 1, "Hispanic-Asian": 7, "White-Asian": 11, "AI/AN-White": 2}, "2010": {"Hispanic-Hispanic": 485, "Black-Black": 219, "AI/AN-Hispanic": 3, "Hispanic-White": 59, "Hispanic-Black": 46, "Asian-Asian": 40, "Asian-White": 17, "Black-White": 37, "Black-Hispanic": 46, "White-Asian": 20, "White-Black": 33, "Black-Asian": 4, "White-White": 212, "White-Hispanic": 58, "AI/AN-AI/AN": 5, "AI/AN-White": 3, "Asian-Hispanic": 13, "AI/AN-Black": 1, "Asian-Black": 4, "Hispanic-Asian": 11, "Hispanic-AI/AN": 2, "White-AI/AN": 1}, "2011": {"Black-Black": 212, "Black-White": 48, "Asian-White": 10, "Hispanic-Hispanic": 439, "White-White": 255, "Asian-Black": 9, "Asian-Asian": 51, "White-Black": 30, "Black-Asian": 19, "Hispanic-Black": 53, "White-Asian": 11, "White-Hispanic": 69, "Hispanic-White": 51, "AI/AN-AI/AN": 3, "Hispanic-AI/AN": 1, "Black-Hispanic": 50, "AI/AN-Black": 1, "Hispanic-Asian": 20, "AI/AN-White": 4, "AI/AN-Hispanic": 2, "Asian-Hispanic": 10}, "2012": {"Black-Black": 248, "Hispanic-Asian": 6, "White-Asian": 15, "Hispanic-White": 64, "Black-White": 50, "Black-Asian": 22, "Asian-Asian": 49, "White-White": 258, "Asian-Black": 6, "Hispanic-Black": 40, "Black-Hispanic": 59, "Hispanic-Hispanic": 482, "Asian-Hispanic": 7, "White-Black": 32, "White-Hispanic": 62, "AI/AN-Asian": 1, "White-AI/AN": 3, "Asian-White": 6, "AI/AN-AI/AN": 3, "AI/AN-White": 1, "AI/AN-Hispanic": 2}, "2013": {"Black-Black": 206, "White-White": 279, "Hispanic-Hispanic": 446, "White-Black": 35, "White-Hispanic": 79, "Hispanic-Black": 39, "Asian-Asian": 24, "Black-White": 37, "Asian-Black": 6, "Black-Hispanic": 48, "Black-Asian": 9, "White-Asian": 8, "Hispanic-White": 86, "White-AI/AN": 1, "Asian-White": 4, "Hispanic-Asian": 9, "Asian-Hispanic": 9, "AI/AN-Hispanic": 1, "AI/AN-White": 3, "Hispanic-AI/AN": 1, "Black-AI/AN": 2}, "2014": {"Asian-Asian": 29, "White-Hispanic": 59, "White-White": 275, "Black-Black": 241, "Black-White": 37, "Hispanic-Hispanic": 399, "Hispanic-White": 78, "Black-Hispanic": 48, "Asian-Hispanic": 11, "Hispanic-Black": 50, "White-Black": 28, "White-Asian": 15, "Hispanic-Asian": 12, "AI/AN-Hispanic": 1, "Asian-Black": 6, "Asian-White": 9, "Black-Asian": 5, "White-AI/AN": 4, "AI/AN-AI/AN": 8, "AI/AN-White": 1}, "2015": {"Black-Black": 217, "White-White": 277, "Hispanic-Hispanic": 427, "Hispanic-Asian": 10, "Black-White": 42, "Hispanic-White": 80, "Black-Hispanic": 55, "Asian-Asian": 34, "Asian-Black": 8, "White-Black": 40, "Hispanic-Black": 52, "White-Hispanic": 82, "Black-AI/AN": 1, "AI/AN-AI/AN": 4, "Hispanic-AI/AN": 5, "White-AI/AN": 1, "AI/AN-White": 1, "AI/AN-Black": 1, "White-Asian": 15, "Black-Asian": 7, "Asian-Hispanic": 11, "Asian-White": 3, "AI/AN-Hispanic": 1}, "2016": {"Asian-Black": 5, "Black-Asian": 22, "Asian-Asian": 38, "Hispanic-Hispanic": 436, "Black-Black": 264, "White-White": 248, "White-Hispanic": 66, "Hispanic-Black": 71, "Black-Hispanic": 41, "Black-White": 42, "White-Black": 38, "Hispanic-White": 71, "Asian-White": 11, "AI/AN-White": 6, "AI/AN-AI/AN": 11, "White-Asian": 19, "Asian-Hispanic": 10, "Hispanic-Asian": 11, "White-AI/AN": 2, "Hispanic-AI/AN": 1, "AI/AN-Hispanic": 1, "AI/AN-Black": 1}, "2017": {"Black-Hispanic": 44, "Hispanic-Hispanic": 397, "Black-Asian": 15, "Asian-Black": 10, "Hispanic-White": 84, "Black-Black": 188, "Asian-Asian": 31, "White-Black": 32, "White-Hispanic": 82, "Asian-Hispanic": 10, "Asian-White": 10, "Black-White": 37, "White-White": 220, "Hispanic-Black": 56, "White-Asian": 18, "White-AI/AN": 3, "AI/AN-White": 3, "Hispanic-Asian": 11, "AI/AN-AI/AN": 6, "Hispanic-AI/AN": 5}, "2018": {"Black-Black": 201, "White-Hispanic": 78, "White-Asian": 8, "Black-Asian": 8, "Asian-Hispanic": 7, "White-White": 242, "White-Black": 29, "Hispanic-Black": 48, "Hispanic-Hispanic": 433, "Hispanic-White": 70, "Asian-White": 7, "Black-Hispanic": 61, "Asian-Asian": 43, "Black-White": 48, "Hispanic-AI/AN": 2, "Hispanic-Asian": 8, "AI/AN-AI/AN": 4, "AI/AN-White": 6, "Asian-Black": 3, "AI/AN-Black": 1, "White-AI/AN": 1, "AI/AN-Asian": 1}, "2019": {"White-White": 222, "Asian-White": 8, "Black-White": 36, "Hispanic-Hispanic": 412, "Hispanic-Black": 39, "Black-Hispanic": 44, "Black-Black": 208, "Hispanic-White": 68, "Asian-Asian": 33, "Asian-Black": 6, "Black-Asian": 16, "White-AI/AN": 3, "White-Black": 30, "AI/AN-White": 2, "AI/AN-Hispanic": 1, "White-Hispanic": 71, "Hispanic-AI/AN": 1, "Hispanic-Asian": 8, "Asian-Hispanic": 7, "White-Asian": 9, "AI/AN-AI/AN": 1}, "2020": {"White-White": 212, "White-Hispanic": 77, "White-Black": 32, "Asian-White": 7, "Black-Black": 275, "Black-White": 52, "Asian-Hispanic": 11, "Hispanic-Hispanic": 511, "AI/AN-Black": 1, "Asian-Black": 6, "Hispanic-Black": 47, "Black-Hispanic": 80, "Hispanic-White": 92, "AI/AN-AI/AN": 3, "White-AI/AN": 2, "Asian-Asian": 36, "White-Asian": 13, "Black-Asian": 13, "Hispanic-Asian": 13, "AI/AN-Asian": 1, "AI/AN-Hispanic": 1, "Hispanic-AI/AN": 1, "Black-AI/AN": 1, "AI/AN-White": 1}, "2022": {"Black-White": 55, "Hispanic-Black": 63, "Black-Black": 300, "Hispanic-Hispanic": 596, "Black-Hispanic": 82, "White-Asian": 4, "Black-Asian": 13, "Asian-Asian": 28, "Asian-Black": 12, "White-White": 166, "Asian-White": 8, "Hispanic-White": 88, "Hispanic-Asian": 19, "White-Hispanic": 80, "White-AI/AN": 1, "AI/AN-AI/AN": 1, "White-Black": 26, "Asian-Hispanic": 7}};
+const RACES=['White','Hispanic','Black','Asian','AI/AN'];
+const CKEY={'White':'White','Hispanic':'Hispanic','Black':'Black','Asian':'Asian','AI/AN':'AIAN'};
+const YEARS=Object.keys(PRIM).map(Number).sort((a,b)=>a-b);
+let unit='dyad', above='Black', below='White';
+function setUnit(u){unit=u;document.getElementById('u-dyad').className='unit'+(u==='dyad'?' on':'');document.getElementById('u-prim').className='unit'+(u==='prim'?' on':'');render();}
+function pills(t,sel,cb){const s=document.getElementById(t);s.innerHTML='';
+RACES.forEach(r=>{const b=document.createElement('button');b.className='pill '+CKEY[r]+(r===sel?' on':'');
+b.textContent=r;b.onclick=()=>cb(r);s.appendChild(b);});}
+function data(){return unit==='prim'?PRIM:DYAD;}
+function val(y,p,v){const d=data()[y]||{};return d[p+'-'+v]||0;}
+const wwTTel=()=>document.getElementById('trendTooltip');
+function wwTT(e,html){const t=wwTTel();if(!t)return;t.innerHTML=html;t.classList.add('visible');wwTTmove(e);}
+function wwTTmove(e){const t=wwTTel();if(!t)return;const r=t.getBoundingClientRect();const vw=window.innerWidth,vh=window.innerHeight;let L=e.clientX+12,T=e.clientY-30;if(L+r.width>vw-8)L=e.clientX-r.width-12;if(L<8)L=8;if(T+r.height>vh-8)T=e.clientY-r.height-10;if(T<8)T=8;t.style.left=L+'px';t.style.top=T+'px';}
+function wwTThide(){const t=wwTTel();if(t)t.classList.remove('visible');}
+document.addEventListener('click',wwTThide);
+function render(){
+pills('row-above',above,r=>{above=r;render();});
+pills('row-below',below,r=>{below=r;render();});
+let ta=0,tb=0;YEARS.forEach(y=>{ta+=val(y,above,below);tb+=val(y,below,above);});
+const ca='var(--c-'+CKEY[above]+')',cb2='var(--c-'+CKEY[below]+')';
+const exc=Math.abs(ta-tb);
+const excCol=ta>tb?ca:(tb>ta?cb2:'var(--mut)');
+const excLab=ta===tb?'dead even':((ta>tb?above+'-on-'+below:below+'-on-'+above)+' homicide excess');
+document.getElementById('totals').innerHTML=
+'<div class="tot"><div class="n" style="color:'+ca+'">'+ta.toLocaleString()+'</div><div class="l">'+above+'-on-'+below+' homicides, 40-yr total</div></div>'+
+'<div class="totglyph">vs</div>'+
+'<div class="tot"><div class="n" style="color:'+cb2+'">'+tb.toLocaleString()+'</div><div class="l">'+below+'-on-'+above+' homicides, 40-yr total</div></div>'+
+'<div class="totglyph">=</div>'+
+'<div class="tot"><div class="n" style="color:'+excCol+'">'+(ta===tb?'0':'+'+exc.toLocaleString())+'</div><div class="l">'+excLab+'</div></div>';
+document.getElementById('lab-above').innerHTML='&#9650; <span style="color:'+ca+'">'+above+' on '+below+' homicides</span>';
+document.getElementById('lab-below').innerHTML='<span style="color:'+cb2+'">'+below+' on '+above+' homicides</span> &#9660;';
+let mx=1;YEARS.forEach(y=>{mx=Math.max(mx,val(y,above,below),val(y,below,above));});
+const ch=document.getElementById('chart');ch.innerHTML='';
+const flips=[],ties=[];
+YEARS.forEach((y,i)=>{const a=val(y,above,below),b=val(y,below,above),fl=b>a;
+if(fl)flips.push(y); else if(a===b&&a>0)ties.push(y);
+const dl=(i*0.012).toFixed(3)+'s',dn=(i*0.012+0.12).toFixed(3)+'s';
+const col=document.createElement('div');col.className='col'+(fl?' flip':'');
+col.innerHTML='<div class="abox"><div class="aval" style="color:'+ca+';animation-delay:'+dn+'">'+a+'</div><div class="vbar" style="height:'+Math.round(140*a/mx)+'px;background:'+ca+';animation-delay:'+dl+'"></div></div>'+
+'<div class="yr'+(fl?' flip':'')+'">'+(y+'').slice(2)+'</div>'+
+'<div class="bbox"><div class="vbar" style="height:'+Math.round(96*b/mx)+'px;background:'+cb2+';animation-delay:'+dl+'"></div><div class="bval" style="color:'+cb2+';animation-delay:'+dn+'">'+b+'</div></div>';
+const verdict = a===b ? '<b style="color:var(--mut)">TIED</b>'
+ : (b>a ? '<b style="color:'+cb2+'">'+below+'&rarr;'+above+' EXCEEDED</b>' : '<b style="color:'+ca+'">'+above+'&rarr;'+below+' EXCEEDED</b>');
+const tthtml='<div style="font-weight:700;margin-bottom:4px">'+y+'</div>'+
+ '<div><span style="color:'+ca+'">'+above+'&rarr;'+below+'</span>: '+a+'</div>'+
+ '<div><span style="color:'+cb2+'">'+below+'&rarr;'+above+'</span>: '+b+'</div>'+
+ '<div style="margin-top:4px">'+verdict+'</div>';
+col.addEventListener('mouseenter',e=>wwTT(e,tthtml));
+col.addEventListener('mousemove',wwTTmove);
+col.addEventListener('mouseleave',wwTThide);
+col.addEventListener('click',e=>{e.stopPropagation();wwTT(e,tthtml);});
+ch.appendChild(col);});
+document.getElementById('wwLegend').innerHTML='<span class="legswatch"></span>Red columns: years where <span style="color:'+cb2+'">'+below+'&rarr;'+above+'</span> exceeded <span style="color:'+ca+'">'+above+'&rarr;'+below+'</span>'+(flips.length?': '+flips.join(', '):' (none in this pairing)')+'.'+(ties.length?' Tied in: '+ties.join(', ')+'.':'')+' Tap any year for both numbers.';
+document.getElementById('unitnote').innerHTML=unit==='prim'
+?'<b>One suspect per victim:</b> each solved case counts the victim once, paired with the first suspect police listed, the standard federal method. If several people took part in one killing, the others are not counted, so every pair runs conservative, same-race and cross-race alike.'
+:'<b>Every suspect:</b> each suspect police reported, paired with each victim in the same incident, FBI Supplementary Homicide Reports, California, 1981 to 2022. Under the stricter one-suspect-per-victim convention totals run lower and the direction is unchanged.';
+}
+render();
+</script>
+<script>
+var caSources=[
+{year:'2024',url:'https://data-openjustice.doj.ca.gov/sites/default/files/2025-07/Crime%20In%20CA%202024%20final.pdf',note:'Page 41'},
+{year:'2023',url:'https://data-openjustice.doj.ca.gov/sites/default/files/2024-07/Crime%20In%20CA%202023f.pdf'},
+{year:'2022',url:'https://data-openjustice.doj.ca.gov/sites/default/files/2023-06/Crime%20In%20CA%202022f.pdf'},
+{year:'2021',url:'https://data-openjustice.doj.ca.gov/sites/default/files/2022-08/Crime%20In%20CA%202021_0.pdf'},
+{year:'2020',url:'https://data-openjustice.doj.ca.gov/sites/default/files/2022-08/Crime%20In%20CA%202020.pdf'},
+{year:'2019',url:'https://data-openjustice.doj.ca.gov/sites/default/files/2022-08/Crime%20In%20CA%202019.pdf'},
+{year:'2018',url:'https://data-openjustice.doj.ca.gov/sites/default/files/2022-08/Crime%20In%20CA%202018%2020190701.pdf'},
+{year:'2017',url:'https://data-openjustice.doj.ca.gov/sites/default/files/2022-08/cd17.pdf'},
+{year:'2016',url:'https://data-openjustice.doj.ca.gov/sites/default/files/2022-08/cd16.pdf'},
+{year:'2015',url:'https://data-openjustice.doj.ca.gov/sites/default/files/2022-08/cd15.pdf'},
+{year:'2014',url:'https://oag.ca.gov/sites/all/files/agweb/pdfs/cjsc/publications/candd/cd14/cd14.pdf'},
+{year:'2013',url:'https://oag.ca.gov/sites/all/files/agweb/pdfs/cjsc/publications/candd/cd13/cd13.pdf'},
+{year:'2012',url:'https://oag.ca.gov/sites/all/files/agweb/pdfs/cjsc/publications/candd/cd12/cd12.pdf'},
+{year:'2011',url:'https://oag.ca.gov/sites/all/files/agweb/pdfs/cjsc/publications/candd/cd11/cd11.pdf'},
+{year:'2010',url:'https://oag.ca.gov/sites/all/files/agweb/pdfs/cjsc/publications/candd/cd10/preface.pdf'},
+{year:'2009',url:'https://oag.ca.gov/sites/all/files/agweb/pdfs/cjsc/publications/candd/cd09/preface.pdf'},
+{year:'2008',url:'https://oag.ca.gov/sites/all/files/agweb/pdfs/cjsc/publications/candd/cd08/preface.pdf'},
+{year:'2007',url:'https://oag.ca.gov/sites/all/files/agweb/pdfs/cjsc/publications/candd/cd07/preface.pdf'},
+{year:'2006',url:'https://oag.ca.gov/sites/all/files/agweb/pdfs/cjsc/publications/candd/cd06-full-report.pdf'},
+{year:'2005',url:'https://oag.ca.gov/sites/all/files/agweb/pdfs/cjsc/publications/candd/cd05-full-report.pdf'},
+{year:'2004',url:'https://oag.ca.gov/sites/all/files/agweb/pdfs/cjsc/publications/candd/cd04-full-report.pdf'},
+{year:'2003',url:'https://oag.ca.gov/sites/all/files/agweb/pdfs/cjsc/publications/candd/cd03-full-report.pdf'},
+{year:'2002',url:'https://oag.ca.gov/sites/all/files/agweb/pdfs/cjsc/publications/candd/cd02-full-report.pdf'},
+{year:'2001',url:'https://oag.ca.gov/sites/all/files/agweb/pdfs/cjsc/publications/candd/cd01-full-report.pdf',note:'Duplicate of 2002'},
+{year:'2000',url:'https://oag.ca.gov/sites/all/files/agweb/pdfs/cjsc/publications/candd/cd00-full-report.pdf'}
+];
+var hateSources=[
+{year:'2024',url:'https://data-openjustice.doj.ca.gov/sites/default/files/2025-06/Hate%20Crime%20In%20CA%202024.pdf'},
+{year:'2023',url:'https://data-openjustice.doj.ca.gov/sites/default/files/2024-06/Hate%20Crime%20In%20CA%202023f_0.pdf'},
+{year:'2022',url:'https://data-openjustice.doj.ca.gov/sites/default/files/2023-06/Hate%20Crime%20In%20CA%202022f.pdf'},
+{year:'2021',url:'https://data-openjustice.doj.ca.gov/sites/default/files/2022-08/Hate%20Crime%20In%20CA%202021.pdf'}
+];
+function renderSources(listId,sources,label){var el=document.getElementById(listId);if(!el)return;el.innerHTML=sources.map(function(sx){var note=sx.note?' <span style="font-size:10px;color:var(--mut)">('+sx.note+')</span>':'';return '<a href="'+sx.url+'" target="_blank" rel="noopener"><span class="obj-src-year">'+sx.year+'</span><span class="obj-src-title">'+label+' '+sx.year+note+'</span><span class="obj-src-ext">PDF &#8599;</span></a>';}).join('');}
+function openCASourcesModal(){renderSources('caSourcesList',caSources,'Crime in California');document.getElementById('caSourcesModal').classList.add('active');document.body.style.overflow='hidden';}
+function openHateSourcesModal(){renderSources('hateSourcesList',hateSources,'Hate Crime in California');document.getElementById('hateSourcesModal').classList.add('active');document.body.style.overflow='hidden';}
+function closeObjModal(id){var m=document.getElementById(id);if(m){m.classList.remove('active');document.body.style.overflow='';}}
+document.addEventListener('keydown',function(e){if(e.key==='Escape'){closeObjModal('caSourcesModal');closeObjModal('hateSourcesModal');}});
+</script>
+
+</body>
+</html>
