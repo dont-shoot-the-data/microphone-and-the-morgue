@@ -207,7 +207,7 @@ a:focus-visible,.pill:focus-visible,.cpill:focus-visible,.unit:focus-visible,.sr
 <div class="dotleg" id="dotleg"></div>
 <div class="dotcap">An average year, 2,031 homicides, shaded by the race arrested. The two red dots are the hate crimes. Tap a color to isolate.</div>
 <h1 class="display">Loud about hate.<br>Silent about <span style="color:var(--red)!important">murder</span>.</h1>
-<div class="lede">Every year toward the end of June, California Attorney General Rob Bonta rolls out his <a href="https://data-openjustice.doj.ca.gov/sites/default/files/2025-06/Hate%20Crime%20In%20CA%202024.pdf" target="_blank" rel="noopener"><em>Hate Crime in California</em></a> report at a press conference of its own. A week later, the <a href="https://data-openjustice.doj.ca.gov/sites/default/files/2025-07/Crime%20In%20CA%202024%20final.pdf" target="_blank" rel="noopener"><em>Crime in California</em></a> report lands with no event, which breaks down homicide, rape, robbery, and kidnapping arrests by race. That one you have to find for yourself. Let's see why.</div>
+<div class="lede">Every June, California Attorney General Rob Bonta rolls out his <a href="https://data-openjustice.doj.ca.gov/sites/default/files/2025-06/Hate%20Crime%20In%20CA%202024.pdf" target="_blank" rel="noopener"><em>Hate Crime in California</em></a> report at a press conference of its own. It contains two homicides. A week later the <a href="https://data-openjustice.doj.ca.gov/sites/default/files/2025-07/Crime%20In%20CA%202024%20final.pdf" target="_blank" rel="noopener"><em>Crime in California</em></a> report, which contains more than two thousand homicides a year, lands with no event and is quietly tucked away on his website. Let's find out why.</div>
 <div class="navarrow"><a onclick="go('stage')" tabindex="0" role="button" aria-label="Continue"><svg viewBox="0 0 24 24"><path d="M12 5v14M19 12l-7 7-7-7"/></svg></a></div>
 </section>
 
@@ -231,14 +231,14 @@ a:focus-visible,.pill:focus-visible,.cpill:focus-visible,.unit:focus-visible,.sr
 <section class="section wrap" id="podium">
 <div class="eyebrow">What the podium produces</div>
 <h2 class="head">1,969 announced. 62 convicted.</h2>
-<div class="prose">That 1,969 is his yearly average, and almost none of it ends in a conviction. The felonies with the highest conviction rate never get the microphone.</div>
+<div class="prose">That 1,969 is his yearly average, and 62 convict, the 3.2% from the hate report. The felony numbers come from a different report. Crime in California tracks how every felony arrest in the state ends, and in 2024 it counted 218,232 of them, homicide and rape and robbery and kidnapping among them, with 130,185 convictions, 59.7%. Two separate reports, two separate stacks of crime, and the 59.7% is not a slice of the hate crimes. It is what happens to felonies across the whole state.</div>
 <div class="panel">
 <div class="statband" style="margin-top:0">
-<div class="s"><div class="sn" style="color:var(--red)">3.2%</div><div class="sl">of announced hate events end in a hate conviction</div></div>
-<div class="s"><div class="sn" style="color:var(--c-White)">59.7%</div><div class="sl">of felony arrests end in conviction</div></div>
+<div class="s"><div class="sn"><a href="https://data-openjustice.doj.ca.gov/sites/default/files/2025-06/Hate%20Crime%20In%20CA%202024.pdf" target="_blank" rel="noopener" style="color:var(--red)!important;text-decoration:underline;text-decoration-color:rgba(255,69,85,.45);text-decoration-thickness:1.5px;text-underline-offset:4px">3.2%</a></div><div class="sl">hate crimes &middot; 1,969 announced, 62 convicted</div></div>
+<div class="s"><div class="sn"><a href="https://data-openjustice.doj.ca.gov/sites/default/files/2025-07/Crime%20In%20CA%202024%20final.pdf" target="_blank" rel="noopener" style="color:var(--c-White)!important;text-decoration:underline;text-decoration-color:rgba(78,168,222,.45);text-decoration-thickness:1.5px;text-underline-offset:4px">59.7%</a></div><div class="sl">all felonies &middot; 218,232 dispositions, 130,185 convicted</div></div>
 </div>
 <div id="convChart"></div>
-<div class="fineprint">Per-year averages, 2021 to 2024: 1,969 hate events announced, 62 hate convictions (7,876 and 249 across the four years; Tables 11, 7B). Felony conviction rate 59.7% (Crime in California, Table 37). Denominators differ: hate is counted per event announced, felonies per arrest.</div>
+<div class="fineprint">Hate side: per-year averages 2021 to 2024, 1,969 events announced, 62 convictions (7,876 and 249 across the four years; Hate Crime in California, Tables 11, 7B). Felony side: 218,232 adult felony arrest dispositions in 2024, 130,185 convictions, 59.7% (Crime in California, Table 37). Denominators differ: hate is counted per event announced, felonies per arrest disposition.</div>
 </div>
 <div class="navarrow"><a onclick="go('who')" tabindex="0" role="button" aria-label="Continue"><svg viewBox="0 0 24 24"><path d="M12 5v14M19 12l-7 7-7-7"/></svg></a></div>
 </section>
@@ -397,15 +397,16 @@ function toggleSrc(){var b=document.getElementById('srcBody'),btn=document.getEl
 /* conviction comparison (vertical) */
 (function(){
   var BLU='#4ea8de',RED='#ff4555';
-  var rows=[{l:'Felony arrest',v:59.7,c:BLU},{l:'Hate event',v:3.2,c:RED}];
-  var W=300,pL=12,pR=12,pT=34,pB=42,maxY=70,H=212,plotW=W-pL-pR,plotH=H-pT-pB,base=pT+plotH,s='';
+  var rows=[{l:'All felonies',sub:'218,232 cases',con:'130,185 convicted',v:59.7,c:BLU},{l:'Hate crimes',sub:'1,969 events',con:'62 convicted',v:3.2,c:RED}];
+  var W=300,pL=12,pR=12,pT=34,pB=56,maxY=70,H=226,plotW=W-pL-pR,plotH=H-pT-pB,base=pT+plotH,s='';
   function yPx(v){return base-(v/maxY)*plotH;}
   rows.forEach(function(r,i){var slot=plotW/rows.length,cx=pL+(i+0.5)*slot,bw=66,x=cx-bw/2,top=yPx(r.v);
     s+='<rect x="'+x+'" y="'+pT+'" width="'+bw+'" height="'+(base-pT)+'" rx="3" fill="rgba(255,255,255,.03)"/>';
     s+='<rect x="'+x+'" y="'+top+'" width="'+bw+'" height="'+(base-top)+'" rx="3" fill="'+r.c+'"/>';
     s+='<text x="'+cx+'" y="'+(top-10)+'" text-anchor="middle" style="fill:'+r.c+';font-family:\'Playfair Display\',serif;font-size:24px;font-weight:900">'+r.v.toFixed(1)+'%</text>';
-    s+='<text x="'+cx+'" y="'+(base+20)+'" text-anchor="middle" style="fill:'+r.c+';font-family:\'JetBrains Mono\',monospace;font-size:12px;font-weight:700">'+r.l+'</text>';
-    s+='<text x="'+cx+'" y="'+(base+33)+'" text-anchor="middle" style="fill:var(--mut);font-family:\'JetBrains Mono\',monospace;font-size:9.5px">end in conviction</text>';});
+    s+='<text x="'+cx+'" y="'+(base+19)+'" text-anchor="middle" style="fill:'+r.c+';font-family:\'JetBrains Mono\',monospace;font-size:12px;font-weight:700">'+r.l+'</text>';
+    s+='<text x="'+cx+'" y="'+(base+33)+'" text-anchor="middle" style="fill:var(--sub);font-family:\'JetBrains Mono\',monospace;font-size:9.5px">'+r.sub+'</text>';
+    s+='<text x="'+cx+'" y="'+(base+45)+'" text-anchor="middle" style="fill:var(--mut);font-family:\'JetBrains Mono\',monospace;font-size:9.5px">'+r.con+'</text>';});
   document.getElementById('convChart').innerHTML='<svg class="cmp-svg" style="max-width:320px" viewBox="0 0 '+W+' '+H+'" role="img" aria-label="Conviction rate, felony versus hate">'+s+'</svg>';
 })();
 
