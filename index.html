@@ -107,6 +107,7 @@ h2.head{font-size:clamp(28px,5vw,46px);margin-bottom:16px}
 .dotleg{display:flex;flex-wrap:wrap;gap:8px;margin:11px 0 0}
 .dlg{font-family:'JetBrains Mono',monospace;font-size:10px;letter-spacing:.5px;color:var(--sub)!important;background:transparent!important;border:1px solid var(--line);border-radius:20px;padding:4px 9px 4px 7px;cursor:pointer;display:inline-flex;align-items:center;gap:7px;transition:all .18s;text-transform:uppercase}
 .dlg:hover,.dlg.act{border-color:var(--sub);color:var(--txt)!important}
+.dlg.cycling{border-color:var(--red)!important;color:var(--red)!important}
 .dlg b{color:var(--txt)!important;font-weight:700}
 .dsw{width:9px;height:9px;border-radius:50%;display:inline-block;flex:none}
 
@@ -231,7 +232,7 @@ a:focus-visible,.pill:focus-visible,.cpill:focus-visible,.unit:focus-visible,.sr
 <section class="section wrap" id="podium">
 <div class="eyebrow">What the podium produces</div>
 <h2 class="head">1,969 announced. 62 convicted.</h2>
-<div class="prose">That is his yearly average. The crime that almost never convicts gets the microphone. The one that convicts six in ten gets a PDF.</div>
+<div class="prose">That 1,969 is his yearly average, and almost none of it convicts. The felonies that convict at the highest rate never get the microphone.</div>
 <div class="panel">
 <div class="statband" style="margin-top:0">
 <div class="s"><div class="sn" style="color:var(--red)">3.2%</div><div class="sl">of announced hate events end in a hate conviction</div></div>
@@ -280,7 +281,7 @@ a:focus-visible,.pill:focus-visible,.cpill:focus-visible,.unit:focus-visible,.sr
 
 <section class="section wrap" id="frontrun">
 <div class="eyebrow">Five years, one choreography</div>
-<h2 class="head">He raised the alarm on graffiti.<br>He buried the body count.</h2>
+<h2 class="head">He raised the alarm on vandalism.<br>He buried the body count.</h2>
 <div class="prose">He gives the hate report <a href="https://oag.ca.gov/news/press-releases/attorney-general-bonta-unveils-new-guidance-reports-help-public-and-law" target="_blank" rel="noopener">an epidemic</a> and a stage, and lets the room picture a villain. His own <a href="https://data-openjustice.doj.ca.gov/sites/default/files/2025-07/Homicide%20In%20CA%202024%20final.pdf" target="_blank" rel="noopener">homicide tables</a>, the ones he never reads aloud, name a different one. <span class="hot">The number that makes minorities the victim gets a microphone. The number that makes them the suspect gets buried.</span> Not the calendar. Editorial policy, and the editor is the California Attorney General.</div>
 
 <div class="prose">And it is all on the record, in advance. For four straight years, the same June: a standalone hate report he rolls out himself, then the Crime in California report days later with no event. Every cell below links to its source.</div>
@@ -368,15 +369,15 @@ function toggleSrc(){var b=document.getElementById('srcBody'),btn=document.getEl
   document.getElementById('dotfield').innerHTML='<svg class="dotfield" id="dotsvg" viewBox="0 0 '+W+' '+H+'" role="img" aria-label="2,031 dots, one average year of California homicides, colored by the race arrested per Crime in California Table 31; two red dots are hate crimes">'+s+'</svg>';
   var leg=document.getElementById('dotleg');
   if(leg){
-    leg.innerHTML='<button class="dlg act" data-r="all">All</button>'+shares.map(function(sh){return '<button class="dlg" data-r="'+sh[0]+'"><span class="dsw" style="background:'+col[sh[0]]+'"></span>'+sh[0]+' <b>'+sh[1]+'%</b></button>';}).join('')+'<button class="dlg" data-r="hate"><span class="dsw" style="background:var(--red)"></span>Hate crime <b>2</b></button>';
-    var svg=document.getElementById('dotsvg');
+    leg.innerHTML='<button class="dlg cyc" data-r="cycle">&#8635; Cycle</button><button class="dlg" data-r="all">All</button>'+shares.map(function(sh){return '<button class="dlg" data-r="'+sh[0]+'"><span class="dsw" style="background:'+col[sh[0]]+'"></span>'+sh[0]+' <b>'+sh[1]+'%</b></button>';}).join('')+'<button class="dlg" data-r="hate"><span class="dsw" style="background:var(--red)"></span>Hate crime <b>2</b></button>';
+    var svg=document.getElementById('dotsvg'),cycBtn=leg.querySelector('.cyc');
+    var CYC=['all','Hispanic','Black','White','Other','hate'],SCROLL_MS=2000,HOLD_MS=10000,ci=0,scrollTimer=null,holdTimer=null;
     function applyR(x){if(x&&x!=='all'){svg.setAttribute('data-hl',x);}else{svg.removeAttribute('data-hl');}}
-    leg.querySelectorAll('.dlg').forEach(function(b){
-      var rr=b.getAttribute('data-r');
-      b.addEventListener('mouseenter',function(){applyR(rr);});
-      b.addEventListener('mouseleave',function(){var a=leg.querySelector('.dlg.act');applyR(a?a.getAttribute('data-r'):'all');});
-      b.addEventListener('click',function(){leg.querySelectorAll('.dlg').forEach(function(x){x.classList.remove('act');});b.classList.add('act');applyR(rr);});
-    });
+    function setCur(r){leg.querySelectorAll('.dlg').forEach(function(x){x.classList.toggle('act',x.getAttribute('data-r')===r);});}
+    function startCycle(){if(holdTimer){clearTimeout(holdTimer);holdTimer=null;}if(scrollTimer)clearInterval(scrollTimer);cycBtn.classList.add('cycling');applyR(CYC[ci]);setCur(CYC[ci]);scrollTimer=setInterval(function(){ci=(ci+1)%CYC.length;applyR(CYC[ci]);setCur(CYC[ci]);},SCROLL_MS);}
+    function holdSel(r){if(scrollTimer){clearInterval(scrollTimer);scrollTimer=null;}if(holdTimer)clearTimeout(holdTimer);cycBtn.classList.remove('cycling');var idx=CYC.indexOf(r);if(idx>=0)ci=idx;applyR(r);setCur(r);holdTimer=setTimeout(function(){holdTimer=null;startCycle();},HOLD_MS);}
+    leg.querySelectorAll('.dlg').forEach(function(b){var rr=b.getAttribute('data-r');b.addEventListener('click',function(){if(rr==='cycle')startCycle();else holdSel(rr);});});
+    if(!(window.matchMedia&&window.matchMedia('(prefers-reduced-motion: reduce)').matches)){startCycle();}else{applyR('all');setCur('all');}
   }
 })();
 
